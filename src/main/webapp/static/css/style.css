@@ -81,7 +81,7 @@ img {
 
 /*--- end reset code ---*/
 body {
-	background: url(../images/1.jpg);
+	background: url(../images/bg.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;

@@ -2,7 +2,8 @@ server:
   port: 80
 spring:
   resources:
-    static-locations: classpath:/resources/static/
+    static-locations: classpath:/static/
+
 #spring:
 #  thymeleaf:
 #    prefix: /WEB-INF/views/

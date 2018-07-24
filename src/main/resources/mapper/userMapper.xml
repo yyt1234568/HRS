@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.UserDao">
+    <resultMap id="AllUser" type="com.example.demo.entity.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result property="password" column="password"/>
+        <result property="role_id" column="role_id"/>
+
+    </resultMap>
+
+    <select id="findAll" resultMap="AllUser">
+        select * from users
+    </select>
+    <select id="findByUserName" parameterType="java.lang.String" resultMap="AllUser">
+        select * from users where username=#{username}
+    </select>
+
+    <insert id="insert" parameterType="com.example.demo.entity.User">
+        insert into users(username,password,role_id) values (#{username},#{password},#{role_id})
+    </insert>
+    <select id="findById" resultMap="AllUser" parameterType="java.lang.Integer">
+        select * from users where id=#{id}
+    </select>
+</mapper>

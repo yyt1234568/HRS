@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.ResumeDao">
+
+<!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.example.demo.entity.Resume">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <result column="sex" property="sex"/>
+        <result column="job_id" property="job_id"/>
+        <result column="current_job" property="current_job"/>
+        <result column="resumepage" property="resumepage"/>
+        <association property="user" column="user_id" javaType="com.example.demo.entity.User">
+            <id property="id" column="id"/>
+            <result property="username" column="username"/>
+            <result property="password" column="password"/>
+            <result property="role_id" column="role_id"/>
+        </association>
+    </resultMap>
+
+
+    <select id="findByUserId" parameterType="java.lang.Integer" resultMap="AllColumnMap">
+        select * from resumes where user_id=#{id}
+    </select>
+
+<!--auto generated Code-->
+    <insert id="insert" parameterType="com.example.demo.entity.Resume">
+        INSERT INTO resumes(name,email,phone,sex,job_id,current_job,resumepage,user_id)
+        VALUES (  #{name}, #{email}, #{phone},
+         #{sex}, #{job_id}, #{current_job},  #{resumepage},#{user.id})
+
+    </insert>
+
+
+    <update id="update" parameterType="com.example.demo.entity.Resume">
+        update resumes set name=#{name},email=#{email},phone=#{phone}
+        ,sex=#{sex},job_id=#{job_id},current_job=#{current_job},resumepage=#{resumepage} where user_id=#{user.id}
+    </update>
+
+</mapper>
