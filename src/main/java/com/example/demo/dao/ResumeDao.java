@@ -12,4 +12,5 @@ public interface ResumeDao {
     Resume findByUserId(Integer id);
 
     void update(Resume resume);
+    void updateRecruit(Resume resume);
 }

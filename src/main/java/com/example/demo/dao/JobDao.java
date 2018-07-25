@@ -7,5 +7,10 @@ import com.example.demo.entity.Job;
 public interface JobDao {
 
 
+
+    void delete(int id);
+
     List<Job> findAll();
+
+    Job findById(int id);
 }

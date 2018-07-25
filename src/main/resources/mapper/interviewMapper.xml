@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.InterviewDao">
+
+<!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.example.demo.entity.Interview">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="deliver_date" property="deliverDate"/>
+        <result column="look_status" property="lookStatus"/>
+        <result column="interview_status" property="interviewStatus"/>
+        <association property="recruit" column="recruit_id" javaType="com.example.demo.entity.Recruit" select="com.example.demo.dao.RecruitDao.findById"/>
+    </resultMap>
+
+
+
+<!--auto generated Code-->
+    <insert id="insert" parameterType="com.example.demo.entity.Interview">
+        INSERT INTO interview( name,  deliver_date,  look_status,  interview_status,recruit_id)
+        VALUES
+        
+            (  #{name},  #{deliverDate},  #{lookStatus},  #{interviewStatus},#{recruit.id})
+    </insert>
+
+
+
+<!--auto generated Code-->
+    <update id="update" parameterType="com.example.demo.entity.Interview">
+        UPDATE interview set
+           name = #{name},  deliver_date = #{deliverDate},  look_status = #{lookStatus},  interview_status = #{interviewStatus},recruit_id=#{recruit.id}
+         WHERE id = #{id}
+    </update>
+
+<!--auto generated Code-->
+    <select id="findAll" resultMap="AllColumnMap">
+        SELECT *
+        FROM interview
+
+    </select>
+    <select id="findById" parameterType="int" resultMap="AllColumnMap">
+         SELECT *
+        FROM interview where id = #{id}
+    </select>
+
+<!--auto generated Code-->
+    <delete id="delete" parameterType="int">
+        DELETE FROM interview where id = #{id}
+    </delete>
+</mapper>

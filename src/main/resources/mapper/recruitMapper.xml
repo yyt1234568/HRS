@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.RecruitDao">
+
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.example.demo.entity.Recruit">
+        <result column="id" property="id"/>
+        <result column="createDate" property="createDate"/>
+        <result column="salary" property="salary"/>
+        <result column="count" property="count"/>
+        <result column="demand" property="demand"/>
+        <result column="title" property="title"/>
+        <association property="job" column="job_id" javaType="com.example.demo.entity.Job" select="com.example.demo.dao.JobDao.findById"/>
+        <association property="dept" column="dept_id" javaType="com.example.demo.entity.Dept" select="com.example.demo.dao.DeptDao.findById"/>
+    </resultMap>
+
+
+    <!--auto generated Code-->
+    <insert id="insert" parameterType="com.example.demo.entity.Recruit">
+        INSERT INTO recruits
+             salary, 
+             count, 
+             demand, 
+             title, 
+        
+        VALUES(
+             #{salary}, 
+             #{count}, 
+             #{demand}, 
+             #{title})
+        
+             
+        
+    </insert>
+
+
+    <!--auto generated Code-->
+    <update id="update" parameterType="com.example.demo.entity.Recruit">
+        UPDATE recruits
+       set
+             salary = #{salary}, 
+             count = #{count}, 
+             demand = #{demand}, 
+             title = #{title}
+
+         WHERE id = #{id}
+    </update>
+
+    <!--auto generated Code-->
+    <select id="findAll" resultMap="AllColumnMap">
+        SELECT *
+        FROM recruits
+    </select>
+
+    <select id="findById" resultMap="AllColumnMap" parameterType="int">
+        SELECT *
+        FROM recruits where id=#{id}
+    </select>
+
+    <!--auto generated Code-->
+    <delete id="delete" parameterType="int">
+        DELETE FROM recruits where id = #{id}
+    </delete>
+</mapper>

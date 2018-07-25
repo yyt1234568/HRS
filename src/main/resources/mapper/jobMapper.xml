@@ -2,17 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.dao.JobDao">
 
-<!--auto generated Code-->
+    <!--auto generated Code-->
     <resultMap id="AllColumnMap" type="com.example.demo.entity.Job">
         <result column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="dept_id" property="dept_id"/>
     </resultMap>
 
-<select id="findAll" resultMap="AllColumnMap">
-    select * from jobs
-</select>
+    <select id="findAll" resultMap="AllColumnMap">
+      select * from jobs
+    </select>
 
+    <select id="findById" resultMap="AllColumnMap" parameterType="int">
+      select * from jobs where id=#{id}
+    </select>
+
+    <delete id="delete" parameterType="int">
+        delete from jobs where id=#{id}
+    </delete>
 
 
 </mapper>

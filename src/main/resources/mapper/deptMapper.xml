@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.DeptDao">
+
+<!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.example.demo.entity.Dept">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="create_date" property="createDate"/>
+    </resultMap>
+
+
+    <insert id="insert" parameterType="com.example.demo.entity.Dept">
+        INSERT INTO depts
+        ( name,  create_date)
+        VALUES
+        ( #{name},  #{createDate})
+    </insert>
+
+
+
+
+    <update id="update" parameterType="com.example.demo.entity.Dept">
+        UPDATE depts set
+        name = #{name}
+        WHERE id = #{id}
+    </update>
+
+<!--auto generated Code-->
+    <select id="findAll" resultMap="AllColumnMap">
+        SELECT *
+        FROM depts
+    </select>
+    <select id="findById" resultMap="AllColumnMap" parameterType="int">
+        SELECT *
+        FROM depts where id=#{id}
+    </select>
+
+<!--auto generated Code-->
+    <delete id="delete" parameterType="int">
+        DELETE FROM depts where id = #{id}
+    </delete>
+</mapper>

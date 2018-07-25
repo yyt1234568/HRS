@@ -81,7 +81,7 @@ img {
 
 /*--- end reset code ---*/
 body {
-	background: url(../images/bg.jpg);
+	background: url('../images/1.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
@@ -239,7 +239,7 @@ select, .tickets input[type="number"] {
 	    margin-bottom: 16px;
 }
 .date {
-    background: url(../images/date-icon.png) no-repeat 95.5% 45% #fff;
+    background: url('../images/date-icon.png') no-repeat 95.5% 45% #fff;
     cursor: pointer;
     padding: 8px 0;
 }

@@ -1,17 +1,18 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Job;
-import com.example.demo.entity.Resume;
-import com.example.demo.entity.User;
-import com.example.demo.service.JobService;
-import com.example.demo.service.ResumeService;
-import com.example.demo.service.UserService;
+import com.example.demo.entity.*;
+import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -20,13 +21,19 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
     @Autowired
     private JobService jobService;
-
-
     @Autowired
     private ResumeService resumeService;
+    @Autowired
+    private RecruitService recruitService;
+    @Autowired
+    private InterviewService interviewService;
+
+
+
+
+
 
     @RequestMapping("/")
     String we(){
@@ -41,7 +48,13 @@ public class UserController {
             user=userService.findByName(user.getUsername());
             System.out.println("user"+user);
             session.setAttribute("user",user);
-            return "index";
+            if (user.getRole_id().equals("1")) {
+                return "index";
+            }else if (user.getRole_id().equals("2")){
+                return "index";
+            }else {
+                return "manager";
+            }
         }else {
             return "login";
         }
@@ -86,6 +99,22 @@ public class UserController {
             resumeService.update(resume);
         }
 
+        return "index";
+    }
+
+    @RequestMapping("/recruit")
+    String recruit(Model model){
+        List<Recruit> recruits = recruitService.findAll();
+        System.out.println(recruits);
+        model.addAttribute("recruits",recruits);
+        return "data";
+    }
+
+    @RequestMapping("/deliver")
+    String deliver(Integer id,HttpSession session){
+        User user= (User) session.getAttribute("user");
+        Interview interview=new Interview(-1,user.getUsername(),new Date(),0,0,recruitService.findById(id));
+        interviewService.insert(interview);
         return "index";
     }
 

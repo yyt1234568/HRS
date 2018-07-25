@@ -36,7 +36,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <a class="hiddenanchor" id="tologin"></a>
             <div id="wrapper">
                 <div id="login" class="animate form">
-                    <form action="/user/login" autocomplete="on">
+                    <form action="/user/login" autocomplete="on" method="post">
                         <h1>Log in</h1>
                         <p>
                             <label for="username" class="uname" data-icon="u"> 用户名 </label>
@@ -62,8 +62,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </form>
                 </div>
 
-                <div id="register" class="animate form">
-                    <form action="/user/regist" autocomplete="on" class="validator">
+                <div id="register" class="animate form" >
+                    <form action="/user/regist" autocomplete="on" class="validator" method="post">
                         <h1> Sign up </h1>
                         <p>
                             <label for="usernamesignup" class="uname" data-icon="u">用户名</label>

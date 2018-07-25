@@ -156,7 +156,7 @@ input {
 	cursor: pointer;	
 	background: rgb(61, 157, 179);
 	padding: 8px 5px;
-	font-family: '../fonts/BebasNeueRegular','Arial Narrow',Arial,sans-serif;
+	font-family: 'BebasNeueRegular','Arial Narrow',Arial,sans-serif;
 	color: #fff;
 	font-size: 24px;	
 	border: 1px solid rgb(28, 108, 122);	

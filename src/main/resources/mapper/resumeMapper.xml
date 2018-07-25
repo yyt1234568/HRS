@@ -12,12 +12,15 @@
         <result column="job_id" property="job_id"/>
         <result column="current_job" property="current_job"/>
         <result column="resumepage" property="resumepage"/>
+        <result property="status" column="status"/>
+        <result property="recruit_id" column="recruit_id"/>
         <association property="user" column="user_id" javaType="com.example.demo.entity.User">
             <id property="id" column="id"/>
             <result property="username" column="username"/>
             <result property="password" column="password"/>
             <result property="role_id" column="role_id"/>
         </association>
+
     </resultMap>
 
 
@@ -37,6 +40,11 @@
     <update id="update" parameterType="com.example.demo.entity.Resume">
         update resumes set name=#{name},email=#{email},phone=#{phone}
         ,sex=#{sex},job_id=#{job_id},current_job=#{current_job},resumepage=#{resumepage} where user_id=#{user.id}
+    </update>
+
+
+    <update id="updateRecruit" parameterType="com.example.demo.entity.Resume">
+        update resumes set recruit_id=#{recruit_id} where user_id=#{user.id}
     </update>
 
 </mapper>

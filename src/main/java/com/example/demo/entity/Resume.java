@@ -10,9 +10,12 @@ public class Resume {
     private int current_job;
     private String resumepage;
     private User user=new User();
+    private int status;
+    private int recruit_id;
 
     public Resume() {
     }
+
 
     @Override
     public String toString() {
@@ -26,10 +29,12 @@ public class Resume {
                 ", current_job=" + current_job +
                 ", resumepage='" + resumepage + '\'' +
                 ", user=" + user +
+                ", status=" + status +
+                ", recruit_id=" + recruit_id +
                 '}';
     }
 
-    public Resume(int id, String name, String email, String phone, String sex, int job_id, int current_job, String resumepage, User user) {
+    public Resume(int id, String name, String email, String phone, String sex, int job_id, int current_job, String resumepage, User user, int status, int recruit_id) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -39,6 +44,24 @@ public class Resume {
         this.current_job = current_job;
         this.resumepage = resumepage;
         this.user = user;
+        this.status = status;
+        this.recruit_id = recruit_id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getRecruit_id() {
+        return recruit_id;
+    }
+
+    public void setRecruit_id(int recruit_id) {
+        this.recruit_id = recruit_id;
     }
 
     public int getId() {
