@@ -171,12 +171,23 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/user/addresume" class="nav-link">
+                            <a href="/admin/manager" class="nav-link">
                                 <i class="fa fa-circle-o nav-icon"></i>
                                 <p>应聘信息</p>
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a href="/admin/addwork" class="nav-link">
+                                <i class="fa fa-circle-o nav-icon"></i>
+                                <p>发布招聘信息</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/audition" class="nav-link">
+                                <i class="fa fa-circle-o nav-icon"></i>
+                                <p>面试通知</p>
+                            </a>
+                        </li>
 
                     </ul>
                 </li>

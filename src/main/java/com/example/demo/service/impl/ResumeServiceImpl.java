@@ -30,4 +30,9 @@ public class ResumeServiceImpl implements ResumeService {
     public void update(Resume resume) {
         resumeDao.update(resume);
     }
+
+    @Override
+    public Resume findById(Integer id) {
+        return resumeDao.findById(id);
+    }
 }

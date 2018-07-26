@@ -22,4 +22,10 @@
     <select id="findById" resultMap="AllUser" parameterType="java.lang.Integer">
         select * from users where id=#{id}
     </select>
+
+    <update id="update" parameterType="com.example.demo.entity.User">
+        update  users set
+        password =#{password},role_id=#{role_id}
+        where id=#{id}
+    </update>
 </mapper>

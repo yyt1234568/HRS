@@ -9,6 +9,7 @@
         <result column="deliver_date" property="deliverDate"/>
         <result column="look_status" property="lookStatus"/>
         <result column="interview_status" property="interviewStatus"/>
+        <association property="resume" column="resume_id" javaType="com.example.demo.entity.Resume" select="com.example.demo.dao.ResumeDao.findById"/>
         <association property="recruit" column="recruit_id" javaType="com.example.demo.entity.Recruit" select="com.example.demo.dao.RecruitDao.findById"/>
     </resultMap>
 
@@ -16,10 +17,10 @@
 
 <!--auto generated Code-->
     <insert id="insert" parameterType="com.example.demo.entity.Interview">
-        INSERT INTO interview( name,  deliver_date,  look_status,  interview_status,recruit_id)
+        INSERT INTO interview( name,  deliver_date,  look_status,  interview_status,resume_id,recruit_id)
         VALUES
         
-            (  #{name},  #{deliverDate},  #{lookStatus},  #{interviewStatus},#{recruit.id})
+            (  #{name},  #{deliverDate},  #{lookStatus},  #{interviewStatus},#{resume.id},#{recruit.id})
     </insert>
 
 
@@ -27,7 +28,8 @@
 <!--auto generated Code-->
     <update id="update" parameterType="com.example.demo.entity.Interview">
         UPDATE interview set
-           name = #{name},  deliver_date = #{deliverDate},  look_status = #{lookStatus},  interview_status = #{interviewStatus},recruit_id=#{recruit.id}
+           name = #{name},   look_status = #{lookStatus},  interview_status = #{interviewStatus},resume_id=#{resume.id}
+           ,recruit_id=#{recruit.id}
          WHERE id = #{id}
     </update>
 

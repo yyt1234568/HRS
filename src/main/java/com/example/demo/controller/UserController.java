@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class UserController {
     private RecruitService recruitService;
     @Autowired
     private InterviewService interviewService;
+    @Autowired
+    private Interview_infoService interview_infoService;
 
 
 
@@ -46,7 +49,6 @@ public class UserController {
         boolean flag=userService.login(user);
         if (flag) {
             user=userService.findByName(user.getUsername());
-            System.out.println("user"+user);
             session.setAttribute("user",user);
             if (user.getRole_id().equals("1")) {
                 return "index";
@@ -62,7 +64,6 @@ public class UserController {
 
     @RequestMapping("/regist")
     String regist(User user){
-        System.out.println(user);
         user.setRole_id("1");
         boolean flag=userService.regist(user);
         if (flag) {
@@ -81,6 +82,7 @@ public class UserController {
     @RequestMapping("/addresume")
     String insert(HttpSession session){
         List<Job> jobs=jobService.findAll();
+
         session.setAttribute("jobs",jobs);
         User user = (User) session.getAttribute("user");
         Resume resume=resumeService.findByUserId(user.getId());
@@ -90,9 +92,7 @@ public class UserController {
     }
     @RequestMapping("/add")
     String add(@RequestParam("user_id") Integer user_id, Resume resume){
-        System.out.println(resume);
         resume.getUser().setId(user_id);
-        System.out.println(resume);
         if(resumeService.findByUserId(user_id)==null) {
             resumeService.insert(resume);
         }else{
@@ -103,19 +103,41 @@ public class UserController {
     }
 
     @RequestMapping("/recruit")
-    String recruit(Model model){
+    String recruit(Model model,HttpSession session){
         List<Recruit> recruits = recruitService.findAll();
-        System.out.println(recruits);
+        User user = (User) session.getAttribute("user");
+        System.out.println(user);
+        Resume resume=resumeService.findByUserId(user.getId());
         model.addAttribute("recruits",recruits);
+        model.addAttribute("resume",resume);
         return "data";
     }
 
+
+    @RequestMapping("/showrecruit")
+    String showrecruit(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        List<Interview_info> interviewInfos = interview_infoService.findAll();
+        List<Interview_info> interview_infos=new ArrayList<>();
+        for (int i=0;i<interviewInfos.size();i++){
+            System.out.println("userId"+interviewInfos.get(i).getResume().getUser().getId());
+            if (interviewInfos.get(i).getResume().getUser().getId()==user.getId()){
+                interview_infos.add(interviewInfos.get(i));
+            }
+        }
+        session.setAttribute("interview_infos",interview_infos);
+        return "showrecruit";
+    }
+
     @RequestMapping("/deliver")
-    String deliver(Integer id,HttpSession session){
+    String deliver(Integer recruit_id,Integer resume_id,HttpSession session){
         User user= (User) session.getAttribute("user");
-        Interview interview=new Interview(-1,user.getUsername(),new Date(),0,0,recruitService.findById(id));
+        Resume resume = resumeService.findById(resume_id);
+        Recruit recruit = recruitService.findById(resume_id);
+        Interview interview=new Interview(-1,user.getUsername(),new Date(),0,0,resume,recruit);
         interviewService.insert(interview);
-        return "index";
+
+        return "redirect:/user/index";
     }
 
     @RequestMapping("/user")

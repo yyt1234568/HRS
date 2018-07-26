@@ -37,12 +37,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>简历详情</h1>
+                        <h1>面试通知</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/admin/manager">主页</a></li>
-                            <li class="breadcrumb-item active">简历详情</li>
+                            <li class="breadcrumb-item active">面试通知</li>
                         </ol>
                     </div>
                 </div>
@@ -57,7 +57,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">详细信息</h3>
+                            <h3 class="card-title">面试通知信息</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -66,23 +66,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <tr>
                                     <th>序号</th>
                                     <th>应聘者</th>
-                                    <th>投递时间</th>
-                                    <th>查看状态</th>
-                                    <th>面试状态</th>
-                                    <th colspan="2">操作</th>
-
+                                    <th>面试时间</th>
+                                    <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${interviews}" var="interview">
+                                <c:forEach items="${requestScope.interviewInfos}" var="interviewinfo">
                                     <tr>
-                                        <td>${interview.id}</td>
-                                        <td>${interview.name}</td>
-                                        <td><fmt:formatDate value="${interview.deliverDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                        <td>${interview.lookStatus==0?"未查看":"已查看"}</td>
-                                        <td>${interview.interviewStatus==0?"未面试":"已面试"}</td>
-                                        <td><a href="#">查看</a></td>
-                                        <td><a href="#">删除</a></td>
+                                        <td>${interviewinfo.id}</td>
+                                        <td>${interviewinfo.resume.name}</td>
+                                        <td><fmt:formatDate value="${interviewinfo.view_time}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                        <td><a href="/admin/readaudition?id=${interviewinfo.interview.id}">面试</a></td>
 
 
                                     </tr>
@@ -134,20 +128,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="/static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/static/dist/js/demo.js"></script>
-<!-- page script -->
-<script>
-    $(function () {
-        $("#example1").DataTable();
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false
-        });
-    });
-</script>
+
 
 </body>
 

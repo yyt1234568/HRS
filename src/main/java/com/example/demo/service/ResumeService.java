@@ -8,4 +8,6 @@ public interface ResumeService {
     Resume findByUserId(Integer id);
 
     void update(Resume resume);
+
+    Resume findById(Integer id);
 }

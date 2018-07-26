@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface JobService {
     List<Job> findAll();
+
+    List<Job> findByDeptId(int dept_id);
 }

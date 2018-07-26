@@ -12,7 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
     <meta charset="UTF-8"/>
-    <title>登陆</title>
+    <title>管理员</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -37,12 +37,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>招聘信息</h1>
+                        <h1>反馈信息</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/user/index">主页</a></li>
-                            <li class="breadcrumb-item active">招聘信息</li>
+                            <li class="breadcrumb-item"><a href="/admin/manager">主页</a></li>
+                            <li class="breadcrumb-item active">反馈信息</li>
                         </ol>
                     </div>
                 </div>
@@ -57,36 +57,37 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">所有信息</h3>
+                            <h3 class="card-title">详细信息</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>编号</th>
-                                    <th>标题</th>
-                                    <th>创建时间</th>
-                                    <th>薪资</th>
-                                    <th>部门名称</th>
-                                    <th>职位名称</th>
-                                    <th>招聘人数</th>
-                                    <th>要求</th>
-                                    <th>投递简历</th>
+                                    <th colspan="6" style="text-align: center;vertical-align: middle">反馈信息</th>
+                                </tr>
+                                <tr>
+                                    <th>投递时间</th>
+                                    <th>是否查看</th>
+                                    <th>是否面试</th>
+                                    <th>面试时间</th>
+                                    <th>面试地点</th>
+                                    <th>是否录用</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${requestScope.recruits}" var="recruit">
+                                <c:forEach items="${interview_infos}" var="interview_info">
                                     <tr>
-                                        <td>${recruit.id}</td>
-                                        <td>${recruit.title}</td>
-                                        <td><fmt:formatDate value="${recruit.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                        <td>${recruit.salary}</td>
-                                        <td>${recruit.dept.name}</td>
-                                        <td>${recruit.job.name}</td>
-                                        <td>${recruit.count}</td>
-                                        <td>${recruit.demand}</td>
-                                        <td><a href="/user/deliver?resume_id=${requestScope.resume.id}&&recruit_id=${recruit.id}">投递简历</a></td>
+
+                                        <td><fmt:formatDate value="${interview_info.interview.deliverDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                        <td>${interview_info.interview.lookStatus==0?"未查看":"已查看"}</td>
+                                        <td>${interview_info.interview.interviewStatus==0?"无回应":"按时面试"}</td>
+                                        <td>${interview_info.view_time}</td>
+                                        <td>${interview_info.address}</td>
+                                        <td>${interview_info.interview.resume.status==0?"未录用":"已录用"}</td>
+
+
                                     </tr>
                                 </c:forEach>
 

@@ -18,16 +18,9 @@
     <!--auto generated Code-->
     <insert id="insert" parameterType="com.example.demo.entity.Recruit">
         INSERT INTO recruits
-             salary, 
-             count, 
-             demand, 
-             title, 
-        
-        VALUES(
-             #{salary}, 
-             #{count}, 
-             #{demand}, 
-             #{title})
+        (salary, dept_id,job_id,count, demand,title)
+        VALUES
+        (#{salary}, #{dept.id},#{job.id},#{count},#{demand}, #{title})
         
              
         

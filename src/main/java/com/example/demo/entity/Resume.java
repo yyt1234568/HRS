@@ -7,11 +7,10 @@ public class Resume {
     private String phone;
     private String sex;
     private int job_id;
-    private int current_job;
+    private String current_job;
     private String resumepage;
     private User user=new User();
     private int status;
-    private int recruit_id;
 
     public Resume() {
     }
@@ -30,11 +29,10 @@ public class Resume {
                 ", resumepage='" + resumepage + '\'' +
                 ", user=" + user +
                 ", status=" + status +
-                ", recruit_id=" + recruit_id +
                 '}';
     }
 
-    public Resume(int id, String name, String email, String phone, String sex, int job_id, int current_job, String resumepage, User user, int status, int recruit_id) {
+    public Resume(int id, String name, String email, String phone, String sex, int job_id, String current_job, String resumepage, User user, int status) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -45,7 +43,6 @@ public class Resume {
         this.resumepage = resumepage;
         this.user = user;
         this.status = status;
-        this.recruit_id = recruit_id;
     }
 
     public int getStatus() {
@@ -56,13 +53,6 @@ public class Resume {
         this.status = status;
     }
 
-    public int getRecruit_id() {
-        return recruit_id;
-    }
-
-    public void setRecruit_id(int recruit_id) {
-        this.recruit_id = recruit_id;
-    }
 
     public int getId() {
         return id;
@@ -112,11 +102,11 @@ public class Resume {
         this.job_id = job_id;
     }
 
-    public int getCurrent_job() {
+    public String getCurrent_job() {
         return current_job;
     }
 
-    public void setCurrent_job(int current_job) {
+    public void setCurrent_job(String current_job) {
         this.current_job = current_job;
     }
 

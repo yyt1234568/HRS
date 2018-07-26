@@ -12,7 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
     <meta charset="UTF-8"/>
-    <title>登陆</title>
+    <title>管理员</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -28,7 +28,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-    <jsp:include page="/useraside.jsp"/>
+    <jsp:include page="/manageraside.jsp"/>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -37,12 +37,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>招聘信息</h1>
+                        <h1>简历详情</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/user/index">主页</a></li>
-                            <li class="breadcrumb-item active">招聘信息</li>
+                            <li class="breadcrumb-item"><a href="/admin/manager">主页</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/audition">面试通知</a></li>
+                            <li class="breadcrumb-item active">简历详情</li>
                         </ol>
                     </div>
                 </div>
@@ -57,42 +58,50 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">所有信息</h3>
+                            <h3 class="card-title">面试通知信息</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th>编号</th>
-                                    <th>标题</th>
-                                    <th>创建时间</th>
-                                    <th>薪资</th>
-                                    <th>部门名称</th>
-                                    <th>职位名称</th>
-                                    <th>招聘人数</th>
-                                    <th>要求</th>
-                                    <th>投递简历</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${requestScope.recruits}" var="recruit">
-                                    <tr>
-                                        <td>${recruit.id}</td>
-                                        <td>${recruit.title}</td>
-                                        <td><fmt:formatDate value="${recruit.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                        <td>${recruit.salary}</td>
-                                        <td>${recruit.dept.name}</td>
-                                        <td>${recruit.job.name}</td>
-                                        <td>${recruit.count}</td>
-                                        <td>${recruit.demand}</td>
-                                        <td><a href="/user/deliver?resume_id=${requestScope.resume.id}&&recruit_id=${recruit.id}">投递简历</a></td>
-                                    </tr>
-                                </c:forEach>
+                            <form role="form" action="/admin/recruit">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <input type="hidden" name="id" value="${requestScope.resume.id}"/>
+
+                                        <label for="exampleInput">姓名</label>
+                                        <input type="text" disabled class="form-control" name="name" id="exampleInput" value="${requestScope.resume.name}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInput1">邮箱</label>
+                                        <input type="text" disabled class="form-control" name="email" id="exampleInput1" value="${requestScope.resume.email}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInput2">手机号</label>
+                                        <input type="text" disabled class="form-control" name="phone" id="exampleInput2" value="${requestScope.resume.phone  }">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInput3">性别</label>
+                                        <input type="text" disabled class="form-control" name="sex" id="exampleInput3" value="${requestScope.resume.sex}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInput4">应聘岗位</label>
+                                        <input type="text" disabled class="form-control" id="exampleInput4" value="${requestScope.recruit.job.name}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">目前状态</label>
+                                        <input type="text" disabled class="form-control" id="exampleInputPassword1" value="${requestScope.resume.current_job}">
+                                    </div>
 
 
-                                </tbody>
-                            </table>
+
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+
+                                    <button type="submit" class="btn btn-primary">录用</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button type="reset" class="btn btn-primary">不录用</button>
+                                </div>
+                            </form>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -136,20 +145,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="/static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/static/dist/js/demo.js"></script>
-<!-- page script -->
-<script>
-    $(function () {
-        $("#example1").DataTable();
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false
-        });
-    });
-</script>
+
 
 </body>
 

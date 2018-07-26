@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.Interview_infoDao">
+
+<!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.example.demo.entity.Interview_info">
+        <result column="Id" property="id"/>
+        <result column="view_time" property="view_time"/>
+        <result column="address" property="address"/>
+        <association property="resume" column="resume_id" javaType="com.example.demo.entity.Resume" select="com.example.demo.dao.ResumeDao.findById"/>
+        <association property="interview" column="interview_id" javaType="com.example.demo.entity.Interview" select="com.example.demo.dao.InterviewDao.findById"/>
+    </resultMap>
+
+
+
+<!--auto generated Code-->
+    <insert id="insert" parameterType="com.example.demo.entity.Interview_info">
+        INSERT INTO interview_info
+        (view_time,  address,resume_id,interview_id)
+        VALUES
+        ( #{view_time},  #{address},#{resume.id},#{interview.id})
+    </insert>
+
+
+
+<!--auto generated Code-->
+    <update id="update" parameterType="com.example.demo.entity.Interview_info">
+        UPDATE interview_info set
+        view_time = #{view_time},  address = #{address}
+         WHERE id = #{id}
+    </update>
+
+<!--auto generated Code-->
+    <select id="findAll" resultMap="AllColumnMap">
+        SELECT *
+        FROM interview_info
+    </select>
+
+<!--auto generated Code-->
+    <delete id="delete" parameterType="int">
+        DELETE FROM interview_info where id = #{id}
+    </delete>
+</mapper>

@@ -16,6 +16,9 @@
     <select id="findById" resultMap="AllColumnMap" parameterType="int">
       select * from jobs where id=#{id}
     </select>
+    <select id="findByDeptId" resultMap="AllColumnMap" parameterType="int">
+      select * from jobs where dept_id=#{id}
+    </select>
 
     <delete id="delete" parameterType="int">
         delete from jobs where id=#{id}

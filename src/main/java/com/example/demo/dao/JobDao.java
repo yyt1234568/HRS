@@ -13,4 +13,6 @@ public interface JobDao {
     List<Job> findAll();
 
     Job findById(int id);
+
+    List<Job> findByDeptId(int dept_id);
 }

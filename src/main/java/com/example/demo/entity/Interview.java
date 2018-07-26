@@ -8,17 +8,19 @@ public class Interview {
     private Date deliverDate;
     private int lookStatus;
     private  int interviewStatus;
+    private Resume resume=new Resume();
     private Recruit recruit=new Recruit();
 
     public Interview() {
     }
 
-    public Interview(int id, String name, Date deliverDate, int lookStatus, int interviewStatus, Recruit recruit) {
+    public Interview(int id, String name, Date deliverDate, int lookStatus, int interviewStatus, Resume resume, Recruit recruit) {
         this.id = id;
         this.name = name;
         this.deliverDate = deliverDate;
         this.lookStatus = lookStatus;
         this.interviewStatus = interviewStatus;
+        this.resume = resume;
         this.recruit = recruit;
     }
 
@@ -30,6 +32,7 @@ public class Interview {
                 ", deliverDate=" + deliverDate +
                 ", lookStatus=" + lookStatus +
                 ", interviewStatus=" + interviewStatus +
+                ", resume=" + resume +
                 ", recruit=" + recruit +
                 '}';
     }
@@ -40,6 +43,15 @@ public class Interview {
 
     public void setRecruit(Recruit recruit) {
         this.recruit = recruit;
+    }
+
+    public Resume getResume() {
+
+        return resume;
+    }
+
+    public void setResume(Resume resume) {
+        this.resume = resume;
     }
 
     public int getId() {

@@ -14,4 +14,6 @@ public interface UserDao {
     int insert(User user);
 
     User findById(Integer id);
+
+    void update(User user);
 }

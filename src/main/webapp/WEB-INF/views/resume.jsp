@@ -98,22 +98,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <label class="rating">您当前职业为?<span>*</span></label>
                         <ul>
                             <li>
-                                <c:if test="${resume.current_job==1}">
-                                    <input type="radio" id="a-option" name="current_job" value="1" checked>
+                                <c:if test="${resume.current_job eq '工作中'}">
+                                    <input type="radio" id="a-option" name="current_job" value="工作中" checked>
                                 </c:if>
-                                <c:if test="${resume.current_job!=1}">
-                                    <input type="radio" id="a-option" name="current_job" value="1" >
+                                <c:if test="${resume.current_job ne '工作中'}">
+                                    <input type="radio" id="a-option" name="current_job" value="工作中" >
                                 </c:if>
 
                                 <label for="a-option">工作中 </label>
                                 <div class="check"></div>
                             </li>
                             <li>
-                                <c:if test="${resume.current_job==2}">
-                                    <input type="radio" id="b-option" name="current_job" value="2" checked>
+                                <c:if test="${resume.current_job eq '尚未工作'}">
+                                    <input type="radio" id="b-option" name="current_job" value="尚未工作" checked>
                                 </c:if>
-                                <c:if test="${resume.current_job!=2}">
-                                    <input type="radio" id="b-option" name="current_job" value="2">
+                                <c:if test="${resume.current_job ne '尚未工作'}">
+                                    <input type="radio" id="b-option" name="current_job" value="尚未工作">
                                 </c:if>
 
                                 <label for="b-option">尚未工作</label>
@@ -122,11 +122,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 </div>
                             </li>
                             <li>
-                                <c:if test="${resume.current_job==3}">
-                                    <input type="radio" id="b-option" name="current_job" value="3"checked>
+                                <c:if test="${resume.current_job eq '自由'}">
+                                    <input type="radio" id="b-option" name="current_job" value="自由"checked>
                                 </c:if>
-                                <c:if test="${resume.current_job!=3}">
-                                    <input type="radio" id="c-option" name="current_job" value="3">
+                                <c:if test="${resume.current_job ne '自由'}">
+                                    <input type="radio" id="c-option" name="current_job" value="自由">
                                 </c:if>
                                 <label for="c-option">自由</label>
                                 <div class="check">
@@ -134,11 +134,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 </div>
                             </li>
                             <li>
-                                <c:if test="${resume.current_job==4}">
-                                    <input type="radio" id="d-option" name="current_job" value="4"checked>
+                                <c:if test="${resume.current_job eq '学生'}">
+                                    <input type="radio" id="d-option" name="current_job" value="学生"checked>
                                 </c:if>
-                                <c:if test="${resume.current_job!=4}">
-                                    <input type="radio" id="d-option" name="current_job" value="4">
+                                <c:if test="${resume.current_job ne '学生'}">
+                                    <input type="radio" id="d-option" name="current_job" value="学生">
                                 </c:if>
                                 <label for="d-option">学生</label>
                                 <div class="check"></div>

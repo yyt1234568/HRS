@@ -20,4 +20,9 @@ public class JobServiceImpl implements JobService {
     public List<Job> findAll() {
         return jobDao.findAll();
     }
+
+    @Override
+    public List<Job> findByDeptId(int dept_id) {
+        return jobDao.findByDeptId(dept_id);
+    }
 }

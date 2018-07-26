@@ -34,4 +34,9 @@ public class InterviewServiceImpl implements InterviewService {
         return interviewDao.update(interview);
     }
 
+    @Override
+    public Interview findById(Integer id) {
+        return interviewDao.findById(id);
+    }
+
 }

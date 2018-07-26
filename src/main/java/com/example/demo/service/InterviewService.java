@@ -14,4 +14,6 @@ public interface InterviewService {
     List<Interview> findAll();
 
     int update(Interview interview);
+
+    Interview findById(Integer id);
 }

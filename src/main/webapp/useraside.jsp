@@ -187,6 +187,12 @@
                                 <p>岗位需求</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/user/showrecruit" class="nav-link">
+                                <i class="fa fa-circle-o nav-icon"></i>
+                                <p>简历反馈</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

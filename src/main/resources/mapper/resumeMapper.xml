@@ -13,13 +13,7 @@
         <result column="current_job" property="current_job"/>
         <result column="resumepage" property="resumepage"/>
         <result property="status" column="status"/>
-        <result property="recruit_id" column="recruit_id"/>
-        <association property="user" column="user_id" javaType="com.example.demo.entity.User">
-            <id property="id" column="id"/>
-            <result property="username" column="username"/>
-            <result property="password" column="password"/>
-            <result property="role_id" column="role_id"/>
-        </association>
+        <association property="user" column="user_id" javaType="com.example.demo.entity.User" select="com.example.demo.dao.UserDao.findById"/>
 
     </resultMap>
 
@@ -28,6 +22,9 @@
         select * from resumes where user_id=#{id}
     </select>
 
+    <select id="findById" parameterType="java.lang.Integer" resultMap="AllColumnMap">
+        select * from resumes where id=#{id}
+    </select>
 <!--auto generated Code-->
     <insert id="insert" parameterType="com.example.demo.entity.Resume">
         INSERT INTO resumes(name,email,phone,sex,job_id,current_job,resumepage,user_id)
@@ -38,13 +35,12 @@
 
 
     <update id="update" parameterType="com.example.demo.entity.Resume">
-        update resumes set name=#{name},email=#{email},phone=#{phone}
+        update resumes set
+        name=#{name},email=#{email},phone=#{phone}
         ,sex=#{sex},job_id=#{job_id},current_job=#{current_job},resumepage=#{resumepage} where user_id=#{user.id}
     </update>
 
 
-    <update id="updateRecruit" parameterType="com.example.demo.entity.Resume">
-        update resumes set recruit_id=#{recruit_id} where user_id=#{user.id}
-    </update>
+
 
 </mapper>

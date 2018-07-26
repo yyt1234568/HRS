@@ -81,8 +81,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                         <td><fmt:formatDate value="${interview.deliverDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                                         <td>${interview.lookStatus==0?"未查看":"已查看"}</td>
                                         <td>${interview.interviewStatus==0?"未面试":"已面试"}</td>
-                                        <td><a href="#">查看</a></td>
-                                        <td><a href="#">删除</a></td>
+                                        <td><a href="/admin/readresume?id=${interview.id}">查看</a></td>
+                                        <td><a href="/admin/deleteresume?id=${interview.id}">删除</a></td>
 
 
                                     </tr>
@@ -134,20 +134,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="/static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/static/dist/js/demo.js"></script>
-<!-- page script -->
-<script>
-    $(function () {
-        $("#example1").DataTable();
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false
-        });
-    });
-</script>
+
 
 </body>
 
