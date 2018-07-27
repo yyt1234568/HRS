@@ -12,4 +12,6 @@ public interface Interview_infoService {
     List<Interview_info> findAll();
 
     int update(Interview_info interview_info);
+
+    Interview_info findByInterviewId(int id);
 }

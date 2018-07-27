@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -32,6 +33,8 @@ public class AdminController {
     private ResumeService  resumeService;
     @Autowired
     private UserService  userService;
+    @Autowired
+    private EmployeeService  employeeService;
 
 
     @RequestMapping("/manager")
@@ -109,7 +112,7 @@ public class AdminController {
     @RequestMapping("readaudition")
     public String readaudition(Integer id,Model model){
         Interview interview = interviewService.findById(id);
-
+        Interview_info interviewInfo=interview_infoService.findByInterviewId(id);
         model.addAttribute("interview",interview);
         model.addAttribute("resume", interview.getResume());
         model.addAttribute("recruit", interview.getRecruit());
@@ -117,13 +120,33 @@ public class AdminController {
     }
 
     @RequestMapping("recruit")
-    public String recruit(Resume resume,Model model){
-        System.out.println(resume);
-        Resume resume1 = resumeService.findById(resume.getId());
+    public String recruit(Integer interview_id,Resume resume,Model model){
+        Interview_info interviewInfo = interview_infoService.findByInterviewId(interview_id);
+        Resume resume1 = interviewInfo.getResume();
         User user = userService.findById(resume1.getUser().getId());
         user.setRole_id("2");
         userService.update(user);
+        Recruit recruit = interviewInfo.getInterview().getRecruit();
+        Employee employee=new Employee(-1,recruit.getDept() ,recruit.getJob(),
+                resume1.getName(),interviewInfo.getAddress(),resume1.getPhone(),resume1.getEmail(),
+                resume1.getSex(),null,null,new Date(),recruit.getSalary());
 
+        employeeService.insert(employee);
+
+        interview_infoService.delete(interviewInfo.getId());
+        interviewService.delete(interview_id);
+        recruit.setCount(recruit.getCount()-1);
+        recruitService.update(recruit);
+
+        return "redirect:/admin/manager";
+    }
+
+
+    @RequestMapping("deleterecruit")
+    public String deleterecruit(Integer interview_id,Resume resume,Model model){
+        Interview_info interviewInfo = interview_infoService.findByInterviewId(interview_id);
+        interview_infoService.delete(interviewInfo.getId());
+        interviewService.delete(interview_id);
 
 
         return "redirect:/admin/manager";

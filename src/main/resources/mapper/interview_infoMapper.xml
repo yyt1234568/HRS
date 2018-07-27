@@ -36,6 +36,10 @@
         FROM interview_info
     </select>
 
+    <select id="findByInterviewId" resultMap="AllColumnMap" parameterType="int">
+        select * from interview_info where interview_id=#{id}
+    </select>
+
 <!--auto generated Code-->
     <delete id="delete" parameterType="int">
         DELETE FROM interview_info where id = #{id}

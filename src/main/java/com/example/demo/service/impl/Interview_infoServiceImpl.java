@@ -33,4 +33,9 @@ public class Interview_infoServiceImpl implements Interview_infoService {
         return interview_infoDao.update(pojo);
     }
 
+    @Override
+    public Interview_info findByInterviewId(int id) {
+        return interview_infoDao.findByInterviewId(id);
+    }
+
 }

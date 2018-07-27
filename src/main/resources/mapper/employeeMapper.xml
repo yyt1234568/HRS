@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.EmployeeDao">
+
+<!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.example.demo.entity.Employee">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="address" property="address"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="sex" property="sex"/>
+        <result column="birthday" property="birthday"/>
+        <result column="remark" property="remark"/>
+        <result column="create_date" property="create_date"/>
+        <result column="salary" property="salary"/>
+        <association property="dept" column="dept_id" javaType="com.example.demo.entity.Dept" select="com.example.demo.dao.DeptDao.findById"/>
+        <association property="job" column="job_id" javaType="com.example.demo.entity.Job" select="com.example.demo.dao.JobDao.findById"/>
+    </resultMap>
+
+
+
+
+<!--auto generated Code-->
+    <insert id="insert" parameterType="com.example.demo.entity.Employee">
+        INSERT INTO employees(name, dept_id,job_id,address, phone, email,sex, birthday, remark, create_date, salary)
+        VALUES
+        ( #{name},  #{dept.id},  #{job.id},  #{address},  #{phone},  #{email},  #{sex},  #{birthday},  #{remark},  #{create_date},
+         #{salary})
+
+    </insert>
+
+
+
+<!--auto generated Code-->
+    <update id="update" parameterType="com.example.demo.entity.Employee">
+        UPDATE employees set name = #{name},  address = #{address}, phone = #{phone},
+        email = #{email}, sex = #{sex},birthday = #{birthday}, remark = #{remark}
+         WHERE id = #{id}
+    </update>
+
+<!--auto generated Code-->
+    <select id="findAll" resultMap="AllColumnMap">
+        SELECT *
+        FROM employees
+    </select>
+
+    <select id="findByName" resultMap="AllColumnMap" parameterType="java.lang.String">
+        SELECT * FROM employees where name=#{username}
+    </select>
+<!--auto generated Code-->
+    <delete id="delete" parameterType="int">
+        DELETE FROM employees where id = #{id}
+    </delete>
+</mapper>

@@ -53,7 +53,8 @@ public class UserController {
             if (user.getRole_id().equals("1")) {
                 return "index";
             }else if (user.getRole_id().equals("2")){
-                return "index";
+
+                return "redirect:/employee/info";
             }else {
                 return "manager";
             }

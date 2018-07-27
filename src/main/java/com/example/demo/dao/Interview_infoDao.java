@@ -15,4 +15,6 @@ public interface Interview_infoDao {
     int delete(int id);
 
     List<Interview_info> findAll();
+
+    Interview_info findByInterviewId(int id);
 }

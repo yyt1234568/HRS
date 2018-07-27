@@ -28,7 +28,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-    <jsp:include page="/manageraside.jsp"/>
+    <jsp:include page="/employeeaside.jsp"/>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -37,13 +37,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>简历详情</h1>
+                        <h1>个人信息</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/admin/manager">主页</a></li>
-                            <li class="breadcrumb-item"><a href="/admin/audition">面试通知</a></li>
-                            <li class="breadcrumb-item active">简历详情</li>
+                            <li class="breadcrumb-item"><a href="/emplyee/index">主页</a></li>
+                            <li class="breadcrumb-item active">个人信息</li>
                         </ol>
                     </div>
                 </div>
@@ -58,50 +57,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">面试通知信息</h3>
+                            <h3 class="card-title">个人基本信息</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form role="form" action="/admin/recruit">
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <input type="hidden" name="id" value="${requestScope.resume.id}"/>
-                                        <input type="hidden" name="interview_id" value="${requestScope.interview.id}"/>
-                                        <label for="exampleInput">姓名</label>
-                                        <input type="text" disabled class="form-control" name="name" id="exampleInput" value="${requestScope.resume.name}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInput1">邮箱</label>
-                                        <input type="text" disabled class="form-control" name="email" id="exampleInput1" value="${requestScope.resume.email}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInput2">手机号</label>
-                                        <input type="text" disabled class="form-control" name="phone" id="exampleInput2" value="${requestScope.resume.phone  }">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInput3">性别</label>
-                                        <input type="text" disabled class="form-control" name="sex" id="exampleInput3" value="${requestScope.resume.sex}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInput4">应聘岗位</label>
-                                        <input type="text" disabled class="form-control" id="exampleInput4" value="${requestScope.recruit.job.name}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">目前状态</label>
-                                        <input type="text" disabled class="form-control" id="exampleInputPassword1" value="${requestScope.resume.current_job}">
-                                    </div>
 
 
-
-                                </div>
-                                <!-- /.card-body -->
-
-                                <div class="card-footer">
-
-                                    <button type="submit" class="btn btn-primary">录用</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <button onclick="window.location.href='/admin/deleterecruit'" class="btn btn-primary">不录用</button>
-                                </div>
-                            </form>
                         </div>
                         <!-- /.card-body -->
                     </div>
