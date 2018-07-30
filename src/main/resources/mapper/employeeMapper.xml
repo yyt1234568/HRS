@@ -48,6 +48,10 @@
     <select id="findByName" resultMap="AllColumnMap" parameterType="java.lang.String">
         SELECT * FROM employees where name=#{username}
     </select>
+
+    <select id="findByDeptIdAndJobId" resultMap="AllColumnMap">
+        SELECT * FROM employees where dept_id=#{dept_id} And job_id=#{job_id}
+    </select>
 <!--auto generated Code-->
     <delete id="delete" parameterType="int">
         DELETE FROM employees where id = #{id}

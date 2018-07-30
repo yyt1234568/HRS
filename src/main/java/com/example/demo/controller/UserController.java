@@ -32,6 +32,8 @@ public class UserController {
     private InterviewService interviewService;
     @Autowired
     private Interview_infoService interview_infoService;
+    @Autowired
+    private EmployeeService employeeService;
 
 
 
@@ -53,7 +55,8 @@ public class UserController {
             if (user.getRole_id().equals("1")) {
                 return "index";
             }else if (user.getRole_id().equals("2")){
-
+                Employee employee = employeeService.findByName(user.getUsername());
+                session.setAttribute("employee",employee);
                 return "redirect:/employee/info";
             }else {
                 return "manager";

@@ -74,14 +74,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <div class="form-group">
                                         <label for="exampleInput2" id="exampleInput2">部门</label>
                                         <select name="dept_id" onchange="serviceTypeChange(this.options[this.selectedIndex].value);">
-                                            <option value="" selected>--请选择--</option>
+                                            <option value="-1" selected>--请选择--</option>
                                             <c:forEach items="${requestScope.depts}" var="dept">
 
                                                 <option value="${dept.id}">${dept.name}</option>
                                             </c:forEach>
                                         </select>
-                                        <label for="exampleInput3">职位</label>
-                                        <select name="job_id" id="exampleInput3">
+                                        <label for="job">职位</label>
+                                        <select name="job_id" id="job">
                                             <option value="" selected>--请选择--</option>
                                         </select>
 
@@ -175,9 +175,15 @@ function serviceTypeChange(value){
         contentType:"application/json;charset=UTF-8",
         dataType:"json",
         success : function(data) {
-            $.each(data, function (i, item) {
-                $("#exampleInput3").append("<option value="+ item.id+">"+ item.name+"</option>");
-            });
+            if (data=='') {
+
+                $("#job").append("<option" + ">" +"--请选择--"+ "</option>");
+            }else{
+                $.each(data, function (i, item) {
+                    $("#job").append("<option value=" + item.id + ">" + item.name + "</option>");
+                });
+
+            }
         }
     });
 }

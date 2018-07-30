@@ -15,4 +15,6 @@ public interface EmployeeDao {
     int update( Employee employee);
 
     Employee findByName(String username);
+
+    List<Employee> findByDeptIdAndJobId(@Param("dept_id") Integer dept_id, @Param("job_id") Integer job_id);
 }

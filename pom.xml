@@ -77,6 +77,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <!-- spring-boot:run 中文乱码解决 -->
+                    <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -84,6 +89,8 @@
                         </goals>
                     </execution>
                 </executions>
+
+
             </plugin>
         </plugins>
     </build>

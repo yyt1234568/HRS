@@ -191,7 +191,7 @@
                     <ul class="nav nav-treeview">
 
                         <li class="nav-item">
-                            <a href="/user/recruit" class="nav-link">
+                            <a href="/employee/deptinfo" class="nav-link">
                                 <i class="fa fa-circle-o nav-icon"></i>
                                 <p>所有部门职位信息</p>
                             </a>
@@ -251,17 +251,12 @@
                     <ul class="nav nav-treeview">
 
                         <li class="nav-item">
-                            <a href="/user/recruit" class="nav-link">
+                            <a href="/employee/sign" class="nav-link">
                                 <i class="fa fa-circle-o nav-icon"></i>
-                                <p>上班打卡</p>
+                                <p>打卡</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/user/recruit" class="nav-link">
-                                <i class="fa fa-circle-o nav-icon"></i>
-                                <p>下班打卡</p>
-                            </a>
-                        </li>
+
                     </ul>
                 </li>
 

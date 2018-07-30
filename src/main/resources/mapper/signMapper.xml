@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.SignDao">
+
+<!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.example.demo.entity.Sign">
+        <result column="id" property="id"/>
+        <result column="start_date" property="start_date"/>
+        <result column="end_date" property="end_date"/>
+        <result column="status" property="status"/>
+        <association property="user" column="user_id" javaType="com.example.demo.entity.User" select="com.example.demo.dao.UserDao.findById"/>
+    </resultMap>
+
+
+
+<!--auto generated Code-->
+    <insert id="insertStart" parameterType="com.example.demo.entity.Sign">
+        INSERT INTO signs(user_id, start_date,status)
+        VALUES(#{user.id},  #{start_date},  #{status})
+    </insert>
+
+    <update id="insertEnd" parameterType="com.example.demo.entity.Sign">
+        update signs set end_date=#{end_date},status=#{status}
+        where user_id=#{user.id}
+    </update>
+
+
+<!--auto generated Code-->
+    <update id="update" parameterType="com.example.demo.entity.Sign">
+        UPDATE signs set
+        start_date = #{start_date},  end_date = #{end_date},  status = #{status}
+         WHERE id = #{id}
+    </update>
+
+<!--auto generated Code-->
+    <select id="findAll" resultMap="AllColumnMap">
+        SELECT * FROM signs
+    </select>
+
+    <select id="findByUserAndDate" parameterType="int" resultMap="AllColumnMap">
+        SELECT * FROM signs WHERE date(start_date) = curdate() and user_id=#{id};
+    </select>
+
+    <select id="findByUser" parameterType="int" resultMap="AllColumnMap">
+        SELECT * FROM signs WHERE  user_id=#{id};
+    </select>
+
+<!--auto generated Code-->
+    <delete id="delete" parameterType="int">
+        DELETE FROM signs where id = #{id}
+    </delete>
+</mapper>

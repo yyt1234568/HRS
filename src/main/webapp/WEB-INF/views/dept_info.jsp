@@ -57,11 +57,56 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">个人基本信息</h3>
+                            <h3 class="card-title">部门职位</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <table  class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <label for="dept">部门</label>
+                                        <select id="dept" onchange="serviceTypeChange(this.options[this.selectedIndex].value);">
+                                            <option value="-1" selected>--请选择--</option>
+                                            <c:forEach items="${requestScope.depts}" var="dept">
 
+                                                <option value="${dept.id}">${dept.name}</option>
+                                            </c:forEach>
+                                        </select>
+                                        <label for="job">职位</label>
+                                        <select  id="job">
+                                            <option value="-1" selected>--请选择--</option>
+                                        </select>
+                                    </th>
+
+
+                                </tr>
+                                </thead>
+                            </table>
+
+
+                            <table id="employee" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>部门</th>
+                                    <th>职位</th>
+                                    <th>姓名</th>
+                                    <th>手机号码</th>
+                                    <th>邮箱</th>
+                                    <th>性别</th>
+                                    <th>生日</th>
+                                    <th>自我评价</th>
+
+                                </tr>
+                                </thead>
+                                <tbody id="tbody">
+
+
+
+
+
+                                </tbody>
+                            </table>
 
                         </div>
                         <!-- /.card-body -->
@@ -106,7 +151,82 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="/static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/static/dist/js/demo.js"></script>
+<script>
 
+    $(function () {
+        $("#job").blur(function () {
+            var dept_id=$("#dept").val();
+            var job_id=$("#job").val();
+            $.ajax({
+                type: "post",
+                url: "/employee/employeedata?dept_id=" + dept_id+"&job_id="+job_id,
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (data) {
+                    var str = "";
+                    if (data!=''){
+                        $.each(data, function (i, item) {
+                            str += "<tr>" +
+                                "<td>" + item.dept.id + "</td>" +
+                                "<td>" + item.job.id + "</td>" +
+                                "<td>" + item.name + "</td>" +
+                                "<td>" + item.phone + "</td>" +
+                                "<td>" + item.email + "</td>" +
+                                "<td>" + item.sex + "</td>" +
+                                "<td>" + item.birthday + "</td>" +
+                                "<td>" + item.remark + "</td>" +
+                                "</tr>";
+                        });
+                    } else{
+                        str="暂无人员"
+                    }
+
+
+
+
+                        tbody.innerHTML = str;
+
+
+
+
+                }
+
+
+            });
+        })
+
+    })
+
+
+
+
+
+    function serviceTypeChange(value){
+        $("#job").empty();
+
+        $.ajax({
+            type: "post",
+            url: "/employee/deptdata?dept_id=" + value,
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: function (data) {
+                if (data=='') {
+
+                    $("#job").append("<option value=" + "-1" + ">"  +"--请选择--"+ "</option>");
+                }else{
+                    $.each(data, function (i, item) {
+                        $("#job").append("<option value=" + item.id + ">" + item.name + "</option>");
+
+                    });
+
+                }
+            }
+
+
+        });
+
+    }
+</script>
 
 </body>
 
