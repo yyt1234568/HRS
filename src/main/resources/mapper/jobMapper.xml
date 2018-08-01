@@ -6,7 +6,7 @@
     <resultMap id="AllColumnMap" type="com.example.demo.entity.Job">
         <result column="id" property="id"/>
         <result column="name" property="name"/>
-        <result column="dept_id" property="dept_id"/>
+        <association column="dept_id" property="dept" javaType="com.example.demo.entity.Dept" select="com.example.demo.dao.DeptDao.findById"/>
     </resultMap>
 
     <select id="findAll" resultMap="AllColumnMap">
@@ -24,5 +24,13 @@
         delete from jobs where id=#{id}
     </delete>
 
+    <update id="update" parameterType="com.example.demo.entity.Job">
+        update jobs set name=#{name},dept_id=#{dept.id}
+        where id=#{id}
+    </update>
+
+    <insert id="insert" parameterType="com.example.demo.entity.Job">
+        insert into jobs(name,dept_id)values (#{name},#{dept.id})
+    </insert>
 
 </mapper>

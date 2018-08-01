@@ -67,11 +67,11 @@ public class UserController {
     }
 
     @RequestMapping("/regist")
-    String regist(User user){
+    String regist(User user,HttpSession session){
         user.setRole_id("1");
         boolean flag=userService.regist(user);
         if (flag) {
-
+            session.setAttribute("user",userService.findByName(user.getUsername()));
             return "index";
         }else {
             return "login";

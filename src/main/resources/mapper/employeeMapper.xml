@@ -39,6 +39,12 @@
          WHERE id = #{id}
     </update>
 
+    <update id="updateAll" parameterType="com.example.demo.entity.Employee">
+        UPDATE employees set dept_id=#{dept.id},job_id=#{job.id},name = #{name},  address = #{address}, phone = #{phone},
+        email = #{email}, sex = #{sex},birthday = #{birthday}, remark = #{remark},salary=#{salary}
+         WHERE id = #{id}
+    </update>
+
 <!--auto generated Code-->
     <select id="findAll" resultMap="AllColumnMap">
         SELECT *
@@ -47,6 +53,10 @@
 
     <select id="findByName" resultMap="AllColumnMap" parameterType="java.lang.String">
         SELECT * FROM employees where name=#{username}
+    </select>
+
+    <select id="findById" resultMap="AllColumnMap" parameterType="int">
+        SELECT * FROM employees where id=#{id}
     </select>
 
     <select id="findByDeptIdAndJobId" resultMap="AllColumnMap">

@@ -6,7 +6,7 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
 
@@ -28,7 +28,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-    <jsp:include page="/employeeaside.jsp"/>
+    <jsp:include page="/manageraside.jsp"/>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -37,12 +37,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>个人信息</h1>
+                        <h1>职位信息</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/emplyee/index">主页</a></li>
-                            <li class="breadcrumb-item active">个人信息</li>
+                            <li class="breadcrumb-item"><a href="/admin/manager">主页</a></li>
+                            <li class="breadcrumb-item active">职位信息</li>
                         </ol>
                     </div>
                 </div>
@@ -57,57 +57,44 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">部门职位</h3>
+                            <h3 class="card-title">职位详情</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table  class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th>
-                                        <label for="dept">部门</label>
-                                        <select id="dept" onchange="serviceTypeChange(this.options[this.selectedIndex].value);">
-                                            <option value="-1" selected>--请选择--</option>
-                                            <c:forEach items="${requestScope.depts}" var="dept">
+                            <div class="form-group">
+                                <label for="dept" >部门</label>
+                                <select id="dept" name="dept_id" onchange="serviceTypeChange(this.options[this.selectedIndex].value);">
+                                    <option value="-1" selected>--请选择--</option>
+                                    <c:forEach items="${requestScope.depts}" var="dept">
 
-                                                <option value="${dept.id}">${dept.name}</option>
-                                            </c:forEach>
-                                        </select>
-                                        <label for="job">职位</label>
-                                        <select  id="job">
-                                            <option value="-1" selected>--请选择--</option>
-                                        </select>
-                                    </th>
+                                        <option value="${dept.id}">${dept.name}</option>
+                                    </c:forEach>
+                                </select>
+                                <label for="job">职位</label>
+                                <select name="job_id" id="job">
+                                    <option value="" selected>--请选择--</option>
+                                </select>
 
 
-                                </tr>
-                                </thead>
-                            </table>
+                            </div>
 
 
                             <table id="employee" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
+                                    <th>序号</th>
                                     <th>部门</th>
                                     <th>职位</th>
-                                    <th>姓名</th>
-                                    <th>手机号码</th>
-                                    <th>邮箱</th>
-                                    <th>性别</th>
-                                    <th>生日</th>
-                                    <th>自我评价</th>
+                                    <th colspan="2">操作</th>
 
                                 </tr>
                                 </thead>
                                 <tbody id="tbody">
 
 
-
-
-
                                 </tbody>
                             </table>
-
+                            <a href="/admin/addjob">添加</a>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -151,6 +138,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="/static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/static/dist/js/demo.js"></script>
+<script src="/static/laydate/laydate.js"></script> <!-- 改成你的路径 -->
 <script>
 
     $(function () {
@@ -159,24 +147,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             var job_id=$("#job").val();
             $.ajax({
                 type: "post",
-                url: "/employee/employeedata?dept_id=" + dept_id+"&job_id="+job_id,
+                url: "/admin/deptdata?job_id="+job_id,
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
                 success: function (data) {
                     var str = "";
                     if (data!=''){
-                        $.each(data, function (i, item) {
+
                             str += "<tr>" +
-                                "<td>" + item.dept.id + "</td>" +
-                                "<td>" + item.job.id + "</td>" +
-                                "<td>" + item.name + "</td>" +
-                                "<td>" + item.phone + "</td>" +
-                                "<td>" + item.email + "</td>" +
-                                "<td>" + item.sex +"</td>" +
-                                "<td>" + item.birthday + "</td>" +
-                                "<td>" + item.remark + "</td>" +
+                                "<td>" + data.id + "</td>" +
+                                "<td>" + data.dept.name + "</td>" +
+                                "<td>" + data.name + "</td>" +
+                                "<td><a href='/admin/addjob?id=" + data.id + "' >修改</a></td>" +
+                                "<td><a href='/admin/deletejob?id=" + data.id + "' >删除</a></td>" +
+
                                 "</tr>";
-                        });
+
                     } else{
                         str="暂无人员"
                     }
@@ -184,7 +170,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 
-                        tbody.innerHTML = str;
+                    tbody.innerHTML = str;
 
 
 
@@ -197,36 +183,31 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     })
 
-
-
-
-
     function serviceTypeChange(value){
         $("#job").empty();
-
         $.ajax({
-            type: "post",
-            url: "/employee/deptdata?dept_id=" + value,
-            contentType: "application/json;charset=UTF-8",
-            dataType: "json",
-            success: function (data) {
+            type : "post",
+            url : "/admin/getJob?dept_id="+value,
+            contentType:"application/json;charset=UTF-8",
+            dataType:"json",
+            success : function(data) {
                 if (data=='') {
 
-                    $("#job").append("<option value=" + "-1" + ">"  +"--请选择--"+ "</option>");
+                    $("#job").append("<option" + ">" +"--请选择--"+ "</option>");
                 }else{
                     $.each(data, function (i, item) {
                         $("#job").append("<option value=" + item.id + ">" + item.name + "</option>");
-
                     });
 
                 }
             }
-
-
         });
-
     }
+
+
 </script>
+<!-- page script -->
+
 
 </body>
 

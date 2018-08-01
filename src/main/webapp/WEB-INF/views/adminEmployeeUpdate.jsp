@@ -37,12 +37,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>发布招聘信息</h1>
+                        <h1>${requestScope.employee.name}信息</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/admin/manager">主页</a></li>
-                            <li class="breadcrumb-item active">招聘信息</li>
+                            <li class="breadcrumb-item active">${requestScope.employee.name}信息</li>
                         </ol>
                     </div>
                 </div>
@@ -57,55 +57,62 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">招聘信息</h3>
+                            <h3 class="card-title">${requestScope.employee.name}信息详情</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form role="form" action="/admin/addrecruit">
+                            <form role="form" action="/admin/adminUpdateEmployee">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="exampleInput">岗位</label>
-                                        <input type="text" class="form-control" name="title" id="exampleInput" value="${requestScope.recruit.title}">
+                                        <input type="hidden"  name="id"  value="${requestScope.employee.id}">
+                                        <label for="dept">部门</label>
+                                        <input type="hidden" name="dept" value="${requestScope.employee.dept.id}"/>
+                                        <input type="text" class="form-control"  id="dept" value="${requestScope.employee.dept.name}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInput1">薪水</label>
-                                        <input type="text" class="form-control" name="salary" id="exampleInput1" value="${requestScope.recruit.salary}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInput2" id="exampleInput2">部门</label>
-                                        <select name="dept_id" onchange="serviceTypeChange(this.options[this.selectedIndex].value);">
-                                            <option value="-1" selected>--请选择--</option>
-                                            <c:forEach items="${requestScope.depts}" var="dept">
-
-                                                <option value="${dept.id}">${dept.name}</option>
-                                            </c:forEach>
-                                        </select>
                                         <label for="job">职位</label>
-                                        <select name="job_id" id="job">
-                                            <option value="" selected>--请选择--</option>
-                                        </select>
-
-
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="exampleInput4">需求</label>
-                                        <input type="text"  class="form-control" name="demand" id="exampleInput4" value="${requestScope.recruit.demand}">
+                                        <input type="hidden" name="job" value="${requestScope.employee.job.id}"/>
+                                        <input type="text" class="form-control"  id="job" value="${requestScope.employee.job.name}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">数量</label>
-                                        <input type="text" class="form-control" name="count" id="exampleInputPassword1" value="${requestScope.recruit.count}">
+                                        <label for="name">名字</label>
+                                        <input type="text" class="form-control" name="name" id="name" value="${requestScope.employee.name}">
                                     </div>
-
-
-
+                                    <div class="form-group">
+                                        <label for="address">地址</label>
+                                        <input type="text" class="form-control" name="address" id="address" value="${requestScope.employee.address}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">手机</label>
+                                        <input type="text" class="form-control" name="phone" id="phone" value="${requestScope.employee.phone}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">邮箱</label>
+                                        <input type="text" class="form-control" name="email" id="email" value="${requestScope.employee.email}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sex">性别</label>
+                                        <input type="text" class="form-control" name="sex" id="sex" value="${requestScope.employee.sex}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="birthday">生日</label>
+                                        <input type="text" class="form-control" name="birthday" id="birthday" value="${requestScope.employee.birthday}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="remark">自评</label>
+                                        <input type="text" class="form-control" name="remark" id="remark" value="${requestScope.employee.remark}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="salary">薪水</label>
+                                        <input type="hidden" name="create_date" value="${requestScope.employee.create_date}"/>
+                                        <input type="text" class="form-control" name="salary" id="salary" value="${requestScope.employee.salary}">
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
 
-                                    <button type="submit" class="btn btn-primary">发布职位</button>
+                                    <button type="submit" class="btn btn-primary">提交</button>
                                 </div>
                             </form>
                         </div>
@@ -167,26 +174,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     });
 
-function serviceTypeChange(value){
-    $("#job").empty();
-    $.ajax({
-        type : "post",
-        url : "/admin/getJob?dept_id="+value,
-        contentType:"application/json;charset=UTF-8",
-        dataType:"json",
-        success : function(data) {
-            if (data=='') {
-
-                $("#job").append("<option" + ">" +"--请选择--"+ "</option>");
-            }else{
-                $.each(data, function (i, item) {
-                    $("#job").append("<option value=" + item.id + ">" + item.name + "</option>");
-                });
-
-            }
-        }
-    });
-}
 
 
 

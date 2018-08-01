@@ -81,4 +81,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
+    @Override
+    public Employee findById(int id) {
+        return employeeDao.findById(id);
+    }
+
+    @Override
+    public void updateAll(Employee employee) {
+        employeeDao.updateAll(employee);
+    }
+
 }

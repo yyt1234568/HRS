@@ -15,4 +15,8 @@ public interface JobDao {
     Job findById(int id);
 
     List<Job> findByDeptId(int dept_id);
+
+    void update(Job job);
+
+    void insert(Job job);
 }

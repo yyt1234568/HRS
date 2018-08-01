@@ -6,7 +6,7 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
 
@@ -37,12 +37,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>招聘信息</h1>
+                        <h1>培训信息</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/user/index">主页</a></li>
-                            <li class="breadcrumb-item active">应聘信息</li>
+                            <li class="breadcrumb-item"><a href="/admin/manager">主页</a></li>
+                            <li class="breadcrumb-item active">培训信息</li>
                         </ol>
                     </div>
                 </div>
@@ -57,40 +57,45 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">所有信息</h3>
+                            <h3 class="card-title">培训详情</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table class="table table-bordered table-striped">
+                            <div class="form-group">
+                            <table  class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>序号</th>
-                                    <th>应聘者</th>
-                                    <th>投递时间</th>
-                                    <th>查看状态</th>
-                                    <th>面试状态</th>
+                                    <th>员工姓名</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
+                                    <th>老师</th>
+                                    <th>课程名</th>
+                                    <th>地址</th>
+                                    <th>内容</th>
                                     <th colspan="2">操作</th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${interviews}" var="interview">
+                                <c:forEach items="${requestScope.trains}" var="train">
                                     <tr>
-                                        <td>${interview.id}</td>
-                                        <td>${interview.name}</td>
-                                        <td><fmt:formatDate value="${interview.deliverDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                        <td>${interview.lookStatus==0?"未查看":"已查看"}</td>
-                                        <td>${interview.interviewStatus==0?"未面试":"已面试"}</td>
-                                        <td><a href="/admin/readresume?id=${interview.id}">查看</a></td>
-                                        <td><a href="/admin/deleteresume?id=${interview.id}">删除</a></td>
-
-
+                                        <td>${train.id}</td>
+                                        <td>${train.employee.name}</td>
+                                        <td>${train.start_time}</td>
+                                        <td>${train.end_time}</td>
+                                        <td>${train.teach_name}</td>
+                                        <td>${train.class_name}</td>
+                                        <td>${train.address}</td>
+                                        <td>${train.context}</td>
+                                        <td><a href="/admin/updatetrain?id=${train.id}">修改</a></td>
+                                        <td><a href="/admin/deletetrain?id=${train.id}">删除</a></td>
                                     </tr>
                                 </c:forEach>
 
-
                                 </tbody>
                             </table>
+
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -134,6 +139,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="/static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/static/dist/js/demo.js"></script>
+
+
+
 
 
 </body>

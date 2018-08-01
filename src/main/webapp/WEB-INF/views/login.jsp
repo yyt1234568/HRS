@@ -24,6 +24,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script>
         $(function () {
             Validator.language = 'en';
+
+
+            $("#usernamesignup").blur(function () {
+                var username = $("#usernamesignup").text();
+                $.ajax({
+                    type: "post",
+                    url: "/user/userdata?username=" + username,
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (data) {
+
+
+                    }
+                })
+            })
         });
     </script>
 </head>
@@ -62,7 +77,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </form>
                 </div>
 
-                <div id="register" class="animate form" >
+                <div id="register" class="animate form">
                     <form action="/user/regist" autocomplete="on" class="validator" method="post">
                         <h1> Sign up </h1>
                         <p>

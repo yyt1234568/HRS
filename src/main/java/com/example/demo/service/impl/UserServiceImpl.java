@@ -29,7 +29,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean regist(User user) {
-        return userDao.insert(user)==1?true:false;
+        User user1 = userDao.findByUserName(user.getUsername());
+        return user1==null&&userDao.insert(user)==1?true:false;
     }
 
     @Override

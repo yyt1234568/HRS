@@ -24,4 +24,8 @@ public interface EmployeeService {
 
     int isSameStartToday(User user, Date now);
     int isSameEndToday(User user, Date now, String start, String end);
+
+    Employee findById(int id);
+
+    void updateAll(Employee employee);
 }

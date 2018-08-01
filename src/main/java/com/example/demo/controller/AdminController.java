@@ -5,6 +5,7 @@ import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,11 +31,11 @@ public class AdminController {
     @Autowired
     private JobService  jobService;
     @Autowired
-    private ResumeService  resumeService;
-    @Autowired
     private UserService  userService;
     @Autowired
     private EmployeeService  employeeService;
+    @Autowired
+    private TrainService  trainService;
 
 
     @RequestMapping("/manager")
@@ -150,6 +151,163 @@ public class AdminController {
 
 
         return "redirect:/admin/manager";
+    }
+
+
+    @RequestMapping("deptinfo")
+    public String deptinfo(Model model){
+        List<Dept> depts = deptService.findAll();
+        model.addAttribute("depts",depts);
+        return "adminDeftInfo";
+    }
+
+    @RequestMapping("deletedept")
+    public String deletedept(Integer id){
+        if (id!=null){
+            deptService.delete(id);
+
+        }
+        return "redirect:/admin/deptInfo";
+    }
+
+    @RequestMapping("adddept")
+    public String adddept(Integer id,Model model){
+        if (id!=null){
+            Dept dept=deptService.findById(id);
+            model.addAttribute("dept",dept);
+        }
+        return "adminDeftUpdate";
+    }
+
+
+    @RequestMapping("addOrUpdate")
+    public String addOrUpdate(Integer id,String name){
+        System.out.println(id+","+name);
+        Dept dept=new Dept();
+        dept.setName(name);
+        if (id!=null){
+            dept.setId(id);
+           deptService.update(dept);
+        }else {
+            dept.setCreateDate(new Date());
+            deptService.insert(dept);
+        }
+        return "redirect:/admin/deptInfo";
+    }
+
+
+
+    /*职位信息*/
+
+    @RequestMapping("jobinfo")
+    public String jobinfo(Model model){
+        List<Dept> depts =deptService.findAll();
+        model.addAttribute("depts",depts);
+        return "adminJobInfo";
+    }
+
+    @RequestMapping("deletejob")
+    public String deletejob(Integer id){
+        if (id!=null){
+            jobService.delete(id);
+
+        }
+        return "adminJobInfo";
+    }
+
+    @RequestMapping("addjob")
+    public String addjob(Integer id,Model model){
+        List<Dept> depts = deptService.findAll();
+        model.addAttribute("depts",depts);
+        if (id!=null){
+            Job job=jobService.findById(id);
+            model.addAttribute("job",job);
+        }
+        return "adminJobUpdate";
+    }
+
+
+    @RequestMapping("addOrUpdateJob")
+    public String addOrUpdateJob(Integer dept_id,Job job, BindingResult bindingResult){
+        job.getDept().setId(dept_id);
+        System.out.println(job);
+        if (job.getId()!=0){
+            jobService.update(job);
+        }else {
+            jobService.insert(job);
+        }
+        return "redirect:/admin/jobinfo";
+    }
+
+    @RequestMapping(value = "deptdata",method=RequestMethod.POST)
+    @ResponseBody
+    public Job employeedata(Model model,Integer job_id) {
+       Job job=jobService.findById(job_id);
+       model.addAttribute("job",job);
+        return  job;
+    }
+
+
+    @RequestMapping("employees")
+    public String employees(Model model){
+        List<Employee> employees = employeeService.findAll();
+        model.addAttribute("employees",employees);
+        return "adminEmployeeInfo";
+    }
+
+
+    @RequestMapping("updateemployee")
+    public String updateemployee(Integer id,Model model){
+        Employee employee=employeeService.findById(id);
+        System.out.println(employee);
+        model.addAttribute("employee",employee);
+        return "adminEmployeeUpdate";
+    }
+
+    @RequestMapping("adminUpdateEmployee")
+    public String adminUpdateEmployee(Integer dept,Integer job,Employee employee, BindingResult bindingResult){
+        employee.getJob().setId(job);
+        employee.getDept().setId(dept);
+        System.out.println(employee);
+        employeeService.updateAll(employee);
+        return "redirect:/admin/employees";
+    }
+
+    @RequestMapping("deleteemployee")
+    public String deleteemployee(Integer id){
+        employeeService.delete(id);
+        return "redirect:/admin/employees";
+    }
+
+
+    //培训信息
+    @RequestMapping("trains")
+    public String trains(Model model){
+        List<Train> trains = trainService.findAll();
+        model.addAttribute("trains",trains);
+        return "adminTrainInfo";
+    }
+
+    @RequestMapping("updatetrain")
+    public String updatetrain(Integer id,Model model){
+        Train train = trainService.findById(id);
+        System.out.println(train);
+        model.addAttribute("train",train);
+        return "adminTrainUpdate";
+    }
+
+    @RequestMapping("adminUpdateTrain")
+    public String adminUpdateTrain(Integer employee,Train train, BindingResult bindingResult){
+        train.getEmployee().setId(employee);
+        System.out.println(train);
+        trainService.update(train);
+        return "redirect:/admin/trains";
+    }
+
+    @RequestMapping("deletetrain")
+    public String deletetrain(Integer id){
+        trainService.delete(id);
+        return "redirect:/admin/trains";
     }
 
 }

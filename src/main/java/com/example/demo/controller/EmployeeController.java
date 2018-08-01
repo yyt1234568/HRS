@@ -100,8 +100,8 @@ public class EmployeeController {
         Date now=new Date();
 
 
-//        User  user=(User) session.getAttribute("user");
-        User  user=new User(2,"yyt","123","2");
+        User  user=(User) session.getAttribute("user");
+//        User  user=new User(2,"yyt","123","2");
 
         int i = employeeService.isSameStartToday(user, now);
         String message="";
@@ -149,8 +149,8 @@ public class EmployeeController {
         Date now=new Date();
 
 
-//        User  user=(User) session.getAttribute("user");
-        User  user=new User(2,"yyt","123","2");
+        User  user=(User) session.getAttribute("user");
+//        User  user=new User(2,"yyt","123","2");
         Sign sign=signService.findByUserAndDate(user);
         int i = employeeService.isSameEndToday(user, now,"12:01","23:59");
         String message="";

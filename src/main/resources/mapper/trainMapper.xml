@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.TrainDao">
+
+<!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.example.demo.entity.Train">
+        <result column="id" property="id"/>
+        <result column="start_time" property="start_time"/>
+        <result column="end_time" property="end_time"/>
+        <result column="teach_name" property="teach_name"/>
+        <result column="class_name" property="class_name"/>
+        <result column="address" property="address"/>
+        <result column="context" property="context"/>
+        <association property="employee" column="emloyee_id" javaType="com.example.demo.entity.Employee"
+                     select="com.example.demo.dao.EmployeeDao.findById"/>
+     </resultMap>
+
+
+    <insert id="insert">
+        INSERT INTO trains (employee_id,start_time,end_time,teach_name,class_name,address,context)
+        VALUES (#{employee.id},#{start_time},#{end_time},#{teach_name},#{class_name},#{address},#{context})
+    </insert>
+
+
+
+<!--auto generated Code-->
+    <update id="update">
+        UPDATE trains set start_time = #{start_time},  end_time = #{end_time},
+         teach_name = #{teach_name}, class_name = #{class_name},  address = #{address},
+          context = #{context}
+         WHERE id = #{id}
+    </update>
+
+<!--auto generated Code-->
+    <select id="findAll" resultMap="AllColumnMap">
+        SELECT *  FROM trains
+    </select>
+
+    <select id="findById" resultMap="AllColumnMap" parameterType="int">
+        SELECT *  FROM trains where id=#{id}
+    </select>
+
+<!--auto generated Code-->
+    <delete id="delete" parameterType="int">
+        DELETE FROM trains where id = #{id}
+    </delete>
+</mapper>

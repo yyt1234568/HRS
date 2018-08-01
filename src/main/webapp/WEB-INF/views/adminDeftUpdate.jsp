@@ -37,12 +37,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>发布招聘信息</h1>
+                        <h1>职位信息</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/admin/manager">主页</a></li>
-                            <li class="breadcrumb-item active">招聘信息</li>
+                            <li class="breadcrumb-item active">职位信息</li>
                         </ol>
                     </div>
                 </div>
@@ -57,55 +57,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">招聘信息</h3>
+                            <h3 class="card-title">职位详情</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form role="form" action="/admin/addrecruit">
+                            <form role="form" action="/admin/addOrUpdate">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="exampleInput">岗位</label>
-                                        <input type="text" class="form-control" name="title" id="exampleInput" value="${requestScope.recruit.title}">
+                                        <input type="hidden"  name="id"  value="${requestScope.dept.id}">
+                                        <label for="dept">部门名字</label>
+                                        <input type="text" class="form-control" name="name" id="dept" value="${requestScope.dept.name}">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleInput1">薪水</label>
-                                        <input type="text" class="form-control" name="salary" id="exampleInput1" value="${requestScope.recruit.salary}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInput2" id="exampleInput2">部门</label>
-                                        <select name="dept_id" onchange="serviceTypeChange(this.options[this.selectedIndex].value);">
-                                            <option value="-1" selected>--请选择--</option>
-                                            <c:forEach items="${requestScope.depts}" var="dept">
-
-                                                <option value="${dept.id}">${dept.name}</option>
-                                            </c:forEach>
-                                        </select>
-                                        <label for="job">职位</label>
-                                        <select name="job_id" id="job">
-                                            <option value="" selected>--请选择--</option>
-                                        </select>
-
-
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="exampleInput4">需求</label>
-                                        <input type="text"  class="form-control" name="demand" id="exampleInput4" value="${requestScope.recruit.demand}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">数量</label>
-                                        <input type="text" class="form-control" name="count" id="exampleInputPassword1" value="${requestScope.recruit.count}">
-                                    </div>
-
-
-
                                 </div>
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
 
-                                    <button type="submit" class="btn btn-primary">发布职位</button>
+                                    <button type="submit" class="btn btn-primary">提交</button>
                                 </div>
                             </form>
                         </div>
@@ -167,26 +135,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     });
 
-function serviceTypeChange(value){
-    $("#job").empty();
-    $.ajax({
-        type : "post",
-        url : "/admin/getJob?dept_id="+value,
-        contentType:"application/json;charset=UTF-8",
-        dataType:"json",
-        success : function(data) {
-            if (data=='') {
-
-                $("#job").append("<option" + ">" +"--请选择--"+ "</option>");
-            }else{
-                $.each(data, function (i, item) {
-                    $("#job").append("<option value=" + item.id + ">" + item.name + "</option>");
-                });
-
-            }
-        }
-    });
-}
 
 
 

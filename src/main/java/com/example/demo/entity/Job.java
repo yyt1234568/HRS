@@ -3,15 +3,15 @@ package com.example.demo.entity;
 public class Job {
     private int id;
     private  String name;
-    private int dept_id;
+    private Dept dept=new Dept();
 
     public Job() {
     }
 
-    public Job(int id, String name, int dept_id) {
+    public Job(int id, String name, Dept dept) {
         this.id = id;
         this.name = name;
-        this.dept_id = dept_id;
+        this.dept = dept;
     }
 
     @Override
@@ -19,8 +19,16 @@ public class Job {
         return "Job{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", dept_id=" + dept_id +
+                ", dept=" + dept +
                 '}';
+    }
+
+    public Dept getDept() {
+        return dept;
+    }
+
+    public void setDept(Dept dept) {
+        this.dept = dept;
     }
 
     public int getId() {
@@ -39,11 +47,5 @@ public class Job {
         this.name = name;
     }
 
-    public int getDept_id() {
-        return dept_id;
-    }
 
-    public void setDept_id(int dept_id) {
-        this.dept_id = dept_id;
-    }
 }

@@ -41,7 +41,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/user/index">主页</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/manager">主页</a></li>
                             <li class="breadcrumb-item active">简历信息</li>
                         </ol>
                     </div>

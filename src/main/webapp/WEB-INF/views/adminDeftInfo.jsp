@@ -6,7 +6,7 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
 
@@ -37,12 +37,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>发布招聘信息</h1>
+                        <h1>部门信息</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/admin/manager">主页</a></li>
-                            <li class="breadcrumb-item active">招聘信息</li>
+                            <li class="breadcrumb-item active">部门信息</li>
                         </ol>
                     </div>
                 </div>
@@ -57,57 +57,35 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">招聘信息</h3>
+                            <h3 class="card-title">部门详情</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form role="form" action="/admin/addrecruit">
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="exampleInput">岗位</label>
-                                        <input type="text" class="form-control" name="title" id="exampleInput" value="${requestScope.recruit.title}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInput1">薪水</label>
-                                        <input type="text" class="form-control" name="salary" id="exampleInput1" value="${requestScope.recruit.salary}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInput2" id="exampleInput2">部门</label>
-                                        <select name="dept_id" onchange="serviceTypeChange(this.options[this.selectedIndex].value);">
-                                            <option value="-1" selected>--请选择--</option>
-                                            <c:forEach items="${requestScope.depts}" var="dept">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>部门</th>
+                                    <th colspan="2">操作</th>
 
-                                                <option value="${dept.id}">${dept.name}</option>
-                                            </c:forEach>
-                                        </select>
-                                        <label for="job">职位</label>
-                                        <select name="job_id" id="job">
-                                            <option value="" selected>--请选择--</option>
-                                        </select>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${depts}" var="dept">
+                                    <tr>
+                                        <td>${dept.id}</td>
+                                        <td>${dept.name}</td>
+                                        <td><a href="/admin/adddept?id=${dept.id}">修改</a></td>
+                                        <td><a href="/admin/deletedept?id=${dept.id}">删除</a></td>
 
 
-                                    </div>
+                                    </tr>
+                                </c:forEach>
 
 
-                                    <div class="form-group">
-                                        <label for="exampleInput4">需求</label>
-                                        <input type="text"  class="form-control" name="demand" id="exampleInput4" value="${requestScope.recruit.demand}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">数量</label>
-                                        <input type="text" class="form-control" name="count" id="exampleInputPassword1" value="${requestScope.recruit.count}">
-                                    </div>
-
-
-
-                                </div>
-                                <!-- /.card-body -->
-
-                                <div class="card-footer">
-
-                                    <button type="submit" class="btn btn-primary">发布职位</button>
-                                </div>
-                            </form>
+                                </tbody>
+                            </table>
+                            <a href="/admin/adddept">添加</a>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -153,12 +131,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="/static/dist/js/demo.js"></script>
 <script src="/static/laydate/laydate.js"></script> <!-- 改成你的路径 -->
 <script>
-/*    var myDate = new Date();
-    //执行一个laydate实例
-    laydate.render({
-        elem: '#view_time' //指定元素
-        ,type: 'datetime'
-    });*/
+    /*    var myDate = new Date();
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#view_time' //指定元素
+            ,type: 'datetime'
+        });*/
 
 
     laydate.render({//渲染开始时间选择
@@ -167,40 +145,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     });
 
-function serviceTypeChange(value){
-    $("#job").empty();
-    $.ajax({
-        type : "post",
-        url : "/admin/getJob?dept_id="+value,
-        contentType:"application/json;charset=UTF-8",
-        dataType:"json",
-        success : function(data) {
-            if (data=='') {
-
-                $("#job").append("<option" + ">" +"--请选择--"+ "</option>");
-            }else{
-                $.each(data, function (i, item) {
-                    $("#job").append("<option value=" + item.id + ">" + item.name + "</option>");
-                });
-
-            }
-        }
-    });
-}
-
-
-
-
-
-
-
-
-
 
 </script>
 <!-- page script -->
-
-
 
 
 </body>

@@ -1,6 +1,5 @@
 package com.example.demo.dao;
 
-import org.apache.ibatis.annotations.Param;
 import java.util.List;
 import com.example.demo.entity.Dept;
 
@@ -12,7 +11,7 @@ public interface DeptDao {
 
     List<Dept> findAll();
 
-    Dept findById();
+    Dept findById(Integer id);
 
     int update( Dept dept);
 
