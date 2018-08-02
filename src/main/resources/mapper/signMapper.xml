@@ -8,6 +8,7 @@
         <result column="start_date" property="start_date"/>
         <result column="end_date" property="end_date"/>
         <result column="status" property="status"/>
+        <result property="given_status" column="given_status" />
         <association property="user" column="user_id" javaType="com.example.demo.entity.User" select="com.example.demo.dao.UserDao.findById"/>
     </resultMap>
 
@@ -28,11 +29,16 @@
 <!--auto generated Code-->
     <update id="update" parameterType="com.example.demo.entity.Sign">
         UPDATE signs set
-        start_date = #{start_date},  end_date = #{end_date},  status = #{status}
+        given_status=#{given_status}
          WHERE id = #{id}
     </update>
 
 <!--auto generated Code-->
+    <select id="findSalary" resultMap="AllColumnMap">
+        SELECT * FROM signs where status=1 and given_status=0
+    </select>
+
+
     <select id="findAll" resultMap="AllColumnMap">
         SELECT * FROM signs
     </select>

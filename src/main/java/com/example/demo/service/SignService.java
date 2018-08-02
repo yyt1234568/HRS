@@ -19,4 +19,6 @@ public interface SignService {
     List<Sign> findByUser(User user);
 
     Sign findByUserAndDate(User user);
+
+    List<Sign> findSalary();
 }

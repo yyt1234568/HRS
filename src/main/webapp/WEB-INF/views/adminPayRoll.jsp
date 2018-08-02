@@ -37,12 +37,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>员工信息</h1>
+                        <h1>薪资信息</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/admin/manager">主页</a></li>
-                            <li class="breadcrumb-item active">员工信息</li>
+                            <li class="breadcrumb-item active">薪资信息</li>
                         </ol>
                     </div>
                 </div>
@@ -57,53 +57,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">员工详情</h3>
+                            <h3 class="card-title">薪资详情</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <div class="form-group">
+
                             <table  class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>序号</th>
-                                    <th>部门</th>
-                                    <th>职位</th>
-                                    <th>姓名</th>
-                                    <th>地址</th>
-                                    <th>手机</th>
-                                    <th>邮箱</th>
-                                    <th>性别</th>
-                                    <th>生日</th>
-                                    <th>自评</th>
-                                    <th>薪水</th>
-                                    <th colspan="2">操作</th>
+                                    <th>员工</th>
+                                    <th>工资</th>
+                                    <th>操作</th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${requestScope.employees}" var="employee">
+                                <c:forEach items="${requestScope.payRolls}" var="payRoll">
                                     <tr>
-                                        <td>${employee.id}</td>
-                                        <td>${employee.dept.name}</td>
-                                        <td>${employee.job.name}</td>
-                                        <td>${employee.name}</td>
-                                        <td>${employee.address}</td>
-                                        <td>${employee.phone}</td>
-                                        <td>${employee.email}</td>
-                                        <td>${employee.sex==1?"男":"女"}</td>
-                                        <td>
-                                            <c:if test="${employee.birthday==null}">
-                                                暂无信息
-                                            </c:if>
-                                            <c:if test="${employee.birthday!=null}">
-
-                                                <fmt:formatDate value="${employee.birthday}" pattern="yyyy-MM-dd" ></fmt:formatDate>
-                                            </c:if>
-                                        </td>
-                                        <td>${employee.remark==null?"暂无信息":employee.remark}</td>
-                                        <td>${employee.salary}</td>
-                                        <td><a href="/admin/updateemployee?id=${employee.id}">修改</a></td>
-                                        <td><a href="/admin/deleteemployee?id=${employee.id}">删除</a></td>
+                                        <td>${payRoll.key.name}</td>
+                                        <td>${payRoll.value}</td>
+                                        <td><a href="/admin/givesalary?id=${payRoll.key.id}">工资发放</a></td>
                                     </tr>
                                 </c:forEach>
 

@@ -11,8 +11,7 @@
         <result column="class_name" property="class_name"/>
         <result column="address" property="address"/>
         <result column="context" property="context"/>
-        <association property="employee" column="emloyee_id" javaType="com.example.demo.entity.Employee"
-                     select="com.example.demo.dao.EmployeeDao.findById"/>
+        <association property="employee" column="employee_id" javaType="com.example.demo.entity.Employee" select="com.example.demo.dao.EmployeeDao.findById"/>
      </resultMap>
 
 

@@ -8,7 +8,7 @@ public interface SignDao {
     
 
 
-    int update(@Param("sign") Sign sign);
+    int update(Sign sign);
 
     int delete(int id);
 
@@ -21,4 +21,6 @@ public interface SignDao {
     Sign findByUserAndDate(int id);
 
     List<Sign> findByUser(int id);
+
+    List<Sign> findSalary();
 }

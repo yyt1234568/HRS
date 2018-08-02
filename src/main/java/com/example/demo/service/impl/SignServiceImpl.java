@@ -51,4 +51,9 @@ public class SignServiceImpl implements SignService {
         return signDao.findByUserAndDate(user.getId());
     }
 
+    @Override
+    public List<Sign> findSalary() {
+        return signDao.findSalary();
+    }
+
 }

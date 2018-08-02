@@ -268,24 +268,24 @@
                 </li>
 
 
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fa fa-table"></i>
-                        <p>
-                            奖惩管理
-                            <i class="fa fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
+                <%--<li class="nav-item has-treeview">--%>
+                    <%--<a href="#" class="nav-link">--%>
+                        <%--<i class="nav-icon fa fa-table"></i>--%>
+                        <%--<p>--%>
+                            <%--奖惩管理--%>
+                            <%--<i class="fa fa-angle-left right"></i>--%>
+                        <%--</p>--%>
+                    <%--</a>--%>
+                    <%--<ul class="nav nav-treeview">--%>
 
-                        <li class="nav-item">
-                            <a href="/user/recruit" class="nav-link">
-                                <i class="fa fa-circle-o nav-icon"></i>
-                                <p>奖惩信息</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                        <%--<li class="nav-item">--%>
+                            <%--<a href="/admin/salaries" class="nav-link">--%>
+                                <%--<i class="fa fa-circle-o nav-icon"></i>--%>
+                                <%--<p>奖惩信息</p>--%>
+                            <%--</a>--%>
+                        <%--</li>--%>
+                    <%--</ul>--%>
+                <%--</li>--%>
 
 
 
@@ -301,7 +301,7 @@
                     <ul class="nav nav-treeview">
 
                         <li class="nav-item">
-                            <a href="/user/recruit" class="nav-link">
+                            <a href="/admin/payroll" class="nav-link">
                                 <i class="fa fa-circle-o nav-icon"></i>
                                 <p>薪资发放</p>
                             </a>

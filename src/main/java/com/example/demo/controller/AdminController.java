@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/admin")
@@ -36,6 +35,10 @@ public class AdminController {
     private EmployeeService  employeeService;
     @Autowired
     private TrainService  trainService;
+    @Autowired
+    private SalaryService  salaryService;
+    @Autowired
+    private SignService  signService;
 
 
     @RequestMapping("/manager")
@@ -284,6 +287,7 @@ public class AdminController {
     @RequestMapping("trains")
     public String trains(Model model){
         List<Train> trains = trainService.findAll();
+        System.out.println(trains);
         model.addAttribute("trains",trains);
         return "adminTrainInfo";
     }
@@ -297,8 +301,8 @@ public class AdminController {
     }
 
     @RequestMapping("adminUpdateTrain")
-    public String adminUpdateTrain(Integer employee,Train train, BindingResult bindingResult){
-        train.getEmployee().setId(employee);
+    public String adminUpdateTrain(Integer employee_id,Train train, BindingResult bindingResult){
+        train.getEmployee().setId(employee_id);
         System.out.println(train);
         trainService.update(train);
         return "redirect:/admin/trains";
@@ -309,5 +313,82 @@ public class AdminController {
         trainService.delete(id);
         return "redirect:/admin/trains";
     }
+
+    /**
+     * 奖惩信息
+     * @param model
+     * @return
+     */
+    @RequestMapping("salaries")
+    String rewards(Model model){
+
+        List<Salary> salaries = salaryService.findAll();
+        System.out.println(salaries);
+        model.addAttribute("salaries",salaries);
+        return "adminSalaries";
+    }
+
+    @RequestMapping("updatesalary")
+    public String updatesalary(Integer id,Model model){
+        Salary salary = salaryService.findById(id);
+        System.out.println(salary);
+        model.addAttribute("salary",salary);
+        return "adminSalaryUpdate";
+    }
+
+    @RequestMapping("adminUpdateSalary")
+    public String adminUpdateSalary(Integer employee_id,Salary salary, BindingResult bindingResult){
+        salary.getEmployee().setId(employee_id);
+        System.out.println(salary);
+        salaryService.update(salary);
+        return "redirect:/admin/salaries";
+    }
+
+    @RequestMapping("deletesalary")
+    public String deletesalary(Integer id){
+        salaryService.delete(id);
+        return "redirect:/admin/salaries";
+    }
+
+    @RequestMapping("payroll")
+    public String payroll(Model model){
+        List<Sign> signs = signService.findAll();
+        List<Sign> signs_backup=new ArrayList<>();
+        Map<Employee,Double> payRolls=new HashMap<>();
+        for (int i = 0; i <signs.size() ; i++) {
+            Sign sign=signs.get(i);
+            if(sign.getStatus()==1&&sign.getGiven_status()==0){
+                Employee employee=employeeService.findByName(sign.getUser().getUsername());
+                System.out.println(employee);
+                signs_backup.add(sign);
+                if(!payRolls.containsKey(employee)){
+                    payRolls.put(employee,200.0);
+                }else{
+                    payRolls.put(employee,200.0+payRolls.get(employee));
+
+                }
+            }
+        }
+        System.out.println(payRolls);
+        model.addAttribute("signs",signs);
+        model.addAttribute("payRolls",payRolls);
+        return "adminPayRoll";
+    }
+
+    @RequestMapping("givesalary")
+    public String givesalary(HttpSession session,Integer id){
+        User user= (User) session.getAttribute("user");
+        List<Sign> signs=signService.findSalary();
+        Employee employee = employeeService.findById(id);
+        for (int i = 0; i <signs.size() ; i++) {
+            Sign sign = signs.get(i);
+            if (sign.getUser().getUsername().equals(employee.getName())){
+                sign.setGiven_status(1);
+                signService.update(sign);
+            }
+        }
+        return "redirect:/admin/payroll";
+    }
+
 
 }

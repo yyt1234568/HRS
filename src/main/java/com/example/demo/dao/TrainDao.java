@@ -6,9 +6,9 @@ import com.example.demo.entity.Train;
 
 public interface TrainDao {
 
-    int insert(@Param("train") Train train);
+    int insert(Train train);
 
-    int update(@Param("train") Train train);
+    int update( Train train);
 
     List<Train> findAll();
 

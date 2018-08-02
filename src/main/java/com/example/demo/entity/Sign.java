@@ -8,6 +8,7 @@ public class Sign {
     private Date start_date;
     private Date end_date;
     private int status;
+    private int given_status;
 
     public Sign() {
     }
@@ -18,6 +19,7 @@ public class Sign {
         this.start_date = start_date;
         this.end_date = end_date;
         this.status = status;
+        given_status=0;
     }
 
     @Override
@@ -28,7 +30,26 @@ public class Sign {
                 ", start_date=" + start_date +
                 ", end_date=" + end_date +
                 ", status=" + status +
+                ", given_status=" + given_status +
                 '}';
+    }
+
+    public Sign(int id, User user, Date start_date, Date end_date, int status, int given_status) {
+        this.id = id;
+        this.user = user;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.status = status;
+        this.given_status = given_status;
+
+    }
+
+    public int getGiven_status() {
+        return given_status;
+    }
+
+    public void setGiven_status(int given_status) {
+        this.given_status = given_status;
     }
 
     public User getUser() {

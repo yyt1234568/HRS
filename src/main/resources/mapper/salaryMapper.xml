@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.SalaryDao">
+
+<!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.example.demo.entity.Salary">
+        <result column="id" property="id"/>
+        <result column="money" property="money"/>
+        <result column="time" property="time"/>
+        <result property="cause" column="cause"/>
+        <association property="employee" column="employee_id" javaType="com.example.demo.entity.Employee"
+                     select="com.example.demo.dao.EmployeeDao.findById"/>
+    </resultMap>
+
+
+<!--auto generated Code-->
+    <insert id="insert">
+        INSERT INTO salary(employee_id,money, time, cause)
+        VALUES
+        ( #{employee.id},  #{money},  #{time}, #{cause})
+    </insert>
+
+
+
+
+<!--auto generated Code-->
+    <update id="update" parameterType="com.example.demo.entity.Salary">
+        UPDATE salarys set
+        employee_id = #{employee.id},  money = #{money}, time = #{time}, cause = #{cause}
+         WHERE id = #{id}
+    </update>
+
+<!--auto generated Code-->
+    <select id="findAll" resultMap="AllColumnMap">
+        SELECT *
+        FROM salarys
+    </select>
+
+    <select id="findByEmployeeId" resultMap="AllColumnMap" parameterType="int">
+        SELECT *  FROM salarys where employee_id=#{id}
+    </select>
+
+
+    <select id="findById" resultMap="AllColumnMap" parameterType="int">
+        SELECT *  FROM salarys where id=#{id}
+    </select>
+
+<!--auto generated Code-->
+    <delete id="delete" parameterType="com.example.demo.entity.Salary">
+        DELETE FROM salarys where id = #{id}
+    </delete>
+</mapper>

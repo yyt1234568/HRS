@@ -12,7 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
     <meta charset="UTF-8"/>
-    <title>管理员</title>
+    <title>员工</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 

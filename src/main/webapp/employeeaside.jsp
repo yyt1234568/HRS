@@ -171,7 +171,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/emplyee/info" class="nav-link">
+                            <a href="/employee/info" class="nav-link">
                                 <i class="fa fa-circle-o nav-icon"></i>
                                 <p>个人基本信息</p>
                             </a>
@@ -210,7 +210,7 @@
                     <ul class="nav nav-treeview">
 
                         <li class="nav-item">
-                            <a href="/user/recruit" class="nav-link">
+                            <a href="/employee/trains" class="nav-link">
                                 <i class="fa fa-circle-o nav-icon"></i>
                                 <p>培训信息</p>
                             </a>
@@ -232,7 +232,7 @@
                     <ul class="nav nav-treeview">
 
                         <li class="nav-item">
-                            <a href="/user/recruit" class="nav-link">
+                            <a href="/employee/rewards" class="nav-link">
                                 <i class="fa fa-circle-o nav-icon"></i>
                                 <p>奖惩信息</p>
                             </a>
@@ -272,13 +272,13 @@
                     <ul class="nav nav-treeview">
 
                         <li class="nav-item">
-                            <a href="/user/recruit" class="nav-link">
+                            <a href="/employee/salarys" class="nav-link">
                                 <i class="fa fa-circle-o nav-icon"></i>
                                 <p>薪资信息</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/user/recruit" class="nav-link">
+                            <a href="/user/salaryError" class="nav-link">
                                 <i class="fa fa-circle-o nav-icon"></i>
                                 <p>工资异议</p>
                             </a>
